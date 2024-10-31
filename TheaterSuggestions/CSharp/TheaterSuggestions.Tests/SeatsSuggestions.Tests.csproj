@@ -64,6 +64,7 @@
 
   <ItemGroup>
     <Folder Include="AuditoriumLayouts\" />
+    <Folder Include="UnitTests\" />
   </ItemGroup>
 
   <ItemGroup>
