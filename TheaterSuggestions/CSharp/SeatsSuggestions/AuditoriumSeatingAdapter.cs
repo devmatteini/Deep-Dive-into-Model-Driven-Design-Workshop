@@ -1,8 +1,7 @@
-﻿using System.Collections.Generic;
-using ExternalDependencies.AuditoriumLayoutRepository;
+﻿using ExternalDependencies.AuditoriumLayoutRepository;
 using ExternalDependencies.ReservationsProvider;
 
-namespace SeatsSuggestions.Tests;
+namespace SeatsSuggestions;
 
 public class AuditoriumSeatingAdapter
     {
