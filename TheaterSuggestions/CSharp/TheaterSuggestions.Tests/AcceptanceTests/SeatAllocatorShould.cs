@@ -17,11 +17,14 @@ namespace SeatsSuggestions.Tests.AcceptanceTests
             //  B: 2   2   1   1   1   1   1   1   2   2
             const string showId = "8";
             const int partyRequested = 2;
+            const int numberOfSuggestions = 1;
             
-            var seatAllocator = new SeatAllocator(new AuditoriumSeatingAdapter(new AuditoriumLayoutRepository(), new ReservationsProvider()));
-            var suggestionsMade = seatAllocator.MakeSuggestions(showId, partyRequested);
+            var auditoriumSeatingAdapter = new AuditoriumSeatingAdapter(new AuditoriumLayoutRepository(), new ReservationsProvider());
+            var seatAllocator = new SeatAllocator(auditoriumSeatingAdapter);
+            var suggestionsMade = seatAllocator.MakeSuggestions(showId, partyRequested, numberOfSuggestions);
 
-            Check.That(suggestionsMade.SeatNames(PricingCategory.First)).ContainsExactly("A1", "A2");
+            var seatNames = suggestionsMade.SeatNames(PricingCategory.Second);
+            Check.That(seatNames).ContainsExactly("A1", "A2");
         }
         
         [Test]

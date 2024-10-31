@@ -1,19 +1,12 @@
 ﻿namespace SeatsSuggestions;
 
-public class AuditoriumSeating
+public class AuditoriumSeating(Dictionary<string, Row> rows)
 {
-    private readonly Dictionary<string, Row> _rows;
-
-    public AuditoriumSeating(Dictionary<string, Row> rows)
-    {
-        _rows = rows;
-    }
-
-    public IReadOnlyDictionary<string, Row> Rows => _rows;
+    public IReadOnlyDictionary<string, Row> Rows => rows;
 
     public SeatingOptionSuggested SuggestSeatingOptionFor(int partyRequested, PricingCategory pricingCategory)
     {
-        foreach (var row in _rows.Values)
+        foreach (var row in rows.Values)
         {
             var seatOptionsSuggested = row.SuggestSeatingOption(partyRequested, pricingCategory);
 
