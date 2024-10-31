@@ -2,7 +2,6 @@
 using ExternalDependencies.ReservationsProvider;
 using NFluent;
 using NUnit.Framework;
-using SuggestionMade;
 
 namespace SeatsSuggestions.Tests.AcceptanceTests
 {
