@@ -2,6 +2,7 @@ package com.baasie.SeatsSuggestionsAcceptanceTests;
 
 import com.baasie.ExternalDependencies.auditoriumlayoutrepository.AuditoriumLayoutRepository;
 import com.baasie.ExternalDependencies.reservationsprovider.ReservationsProvider;
+import com.baasie.SeatsSuggestions.*;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -21,12 +22,19 @@ public class SeatsAllocatorTest {
         //  A: 2   2   1   1   1   1   1   1   2   2
         //  B: 2   2   1   1   1   1   1   1   2   2
         final String showId = "8";
+        final int partyRequested = 2;
+        final int numberOfSuggestions = 1;
+
         AuditoriumSeatingAdapter auditoriumLayoutAdapter =
                 new AuditoriumSeatingAdapter(new AuditoriumLayoutRepository(), new ReservationsProvider());
 
-        // Remove this assertion to the expected one with outcome : A1, A2
-        AuditoriumSeating auditoriumSeating = auditoriumLayoutAdapter.getAuditoriumSeating(showId);
-       assertThat(auditoriumSeating.rows()).hasSize(2);
+        SeatsAllocator seatsAllocator = new SeatsAllocator(auditoriumLayoutAdapter);
+
+        SuggestionsMade suggestionsMade = seatsAllocator.makeSuggestion(showId, partyRequested, numberOfSuggestions);
+
+        assertThat(suggestionsMade.partyRequested()).isEqualTo(partyRequested);
+        assertThat(suggestionsMade.showId()).isEqualTo(showId);
+        assertThat(suggestionsMade.seatNames(PricingCategory.Second)).contains("A1", "A2");
     }
     @Test
     public void should_suggest_one_seat_when_Auditorium_contains_one_available_seat_only() throws IOException {
@@ -35,12 +43,18 @@ public class SeatsAllocatorTest {
         //  A : (2) (2)  1  (1) (1) (1) (1) (1) (2) (2)
         //  B : (2) (2) (1) (1) (1) (1) (1) (1) (2) (2)
         final String showId = "1";
+        final int partyRequested = 1;
+
         AuditoriumSeatingAdapter auditoriumLayoutAdapter =
                 new AuditoriumSeatingAdapter(new AuditoriumLayoutRepository(), new ReservationsProvider());
 
-        // Remove this assertion to the expected one with outcome : A3
-        AuditoriumSeating auditoriumSeating = auditoriumLayoutAdapter.getAuditoriumSeating(showId);
-        assertThat(auditoriumSeating.rows()).hasSize(2);
+        SeatsAllocator seatsAllocator = new SeatsAllocator(auditoriumLayoutAdapter);
+
+        SuggestionsMade suggestionsMade = seatsAllocator.makeSuggestion(showId, partyRequested);
+
+        assertThat(suggestionsMade.partyRequested()).isEqualTo(partyRequested);
+        assertThat(suggestionsMade.showId()).isEqualTo(showId);
+        assertThat(suggestionsMade.seatNames(PricingCategory.First)).containsExactly("A3");
     }
 
     @Test
@@ -50,12 +64,17 @@ public class SeatsAllocatorTest {
         // A : (2) (2) (1) (1) (1) (1) (1) (1) (2) (2)
         // B : (2) (2) (1) (1) (1) (1) (1) (1) (2) (2)
         final String showId = "5";
+        final int partyRequested = 1;
+
         AuditoriumSeatingAdapter auditoriumLayoutAdapter =
                 new AuditoriumSeatingAdapter(new AuditoriumLayoutRepository(), new ReservationsProvider());
 
-        // Remove this assertion to the expected one with outcome : SuggestionNotAvailable
-        AuditoriumSeating auditoriumSeating = auditoriumLayoutAdapter.getAuditoriumSeating(showId);
-        assertThat(auditoriumSeating.rows()).hasSize(2);
+        SeatsAllocator seatsAllocator = new SeatsAllocator(auditoriumLayoutAdapter);
+
+        SuggestionsMade suggestionsMade = seatsAllocator.makeSuggestion(showId, partyRequested);
+        assertThat(suggestionsMade.partyRequested()).isEqualTo(partyRequested);
+        assertThat(suggestionsMade.showId()).isEqualTo(showId);
+        assertThat(suggestionsMade).isInstanceOf(SuggestionNotAvailable.class);
     }
 
    @Test
@@ -68,16 +87,20 @@ public class SeatsAllocatorTest {
         //  D: 2   2   2   2   2   2   2   2   2   2
         //  E: 3   3   3   3   3   3   3   3   3   3
         //  F: 3   3   3   3   3   3   3   3   3   3
-        final String showId = "18";
+       final String showId = "18";
+       final int partyRequested = 1;
+
+
        AuditoriumSeatingAdapter auditoriumLayoutAdapter =
                new AuditoriumSeatingAdapter(new AuditoriumLayoutRepository(), new ReservationsProvider());
 
-       // Remove this assertion to the expected one with outcome :
-       // PricingCategory.First => "A3", "A4", "A5"
-       // PricingCategory.Second => "A1", "A2", "A9"
-       // PricingCategory.Third => "E1", "E2", "E3"
-        AuditoriumSeating auditoriumSeating = auditoriumLayoutAdapter.getAuditoriumSeating(showId);
-       assertThat(auditoriumSeating.rows()).hasSize(6);
+       SeatsAllocator seatsAllocator = new SeatsAllocator(auditoriumLayoutAdapter);
+
+       SuggestionsMade suggestionsMade = seatsAllocator.makeSuggestion(showId, partyRequested);
+
+       assertThat(suggestionsMade.seatNames(PricingCategory.First)).containsExactly("A3", "A4", "A5");
+       assertThat(suggestionsMade.seatNames(PricingCategory.Second)).containsExactly("A1", "A2", "A9");
+       assertThat(suggestionsMade.seatNames(PricingCategory.Third)).containsExactly("E1", "E2", "E3");
     }
 }
 
