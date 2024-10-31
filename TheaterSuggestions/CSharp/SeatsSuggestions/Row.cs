@@ -1,10 +1,33 @@
-﻿
+﻿namespace SeatsSuggestions;
 
-namespace SeatsSuggestions
+public class Row
 {
-    public class Row
+    public Row(string name, List<Seat> seats)
     {
-        public string Name { get; set; }
-        public List<Seat> Seats { get; set; } = new List<Seat>();
+        Name = name;
+        Seats = seats;
+    }
+
+    public string Name { get; }
+    public List<Seat> Seats { get; }
+
+    public void AddSeat(Seat seat)
+    {
+        Seats.Add(seat);
+    }
+
+    public SeatingOptionSuggested SuggestSeatingOption(int partyRequested, PricingCategory pricingCategory)
+    {
+        foreach (var seat in Seats)
+            if (seat.IsAvailable() && seat.MatchCategory(pricingCategory))
+            {
+                var seatAllocation = new SeatingOptionSuggested(partyRequested, pricingCategory);
+
+                seatAllocation.AddSeat(seat);
+
+                if (seatAllocation.MatchExpectation()) return seatAllocation;
+            }
+
+        return new SeatingOptionNotAvailable(partyRequested, pricingCategory);
     }
 }

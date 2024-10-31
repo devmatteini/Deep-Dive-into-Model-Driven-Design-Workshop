@@ -3,7 +3,7 @@ using ExternalDependencies.ReservationsProvider;
 using NFluent;
 using NUnit.Framework;
 
-namespace SeatsSuggestions.Tests.IntergationTests
+namespace SuggestionMade.Tests.IntergationTests
 {
     [TestFixture]
     public class ExternalDependenciesShould

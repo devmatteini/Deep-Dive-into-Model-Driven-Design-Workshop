@@ -15,15 +15,23 @@ public class Seat
     public PricingCategory PricingCategory { get; }
     private SeatAvailability SeatAvailability { get; set; }
 
-    public bool IsAvailable => SeatAvailability == SeatAvailability.Available;
+    public bool IsAvailable()
+    {
+        return SeatAvailability == SeatAvailability.Available;
+    }
 
     public override string ToString()
     {
         return $"{RowName}{Number}";
     }
 
-    public void UpdateCategory(SeatAvailability seatAvailability)
+    public bool MatchCategory(PricingCategory pricingCategory)
     {
-        SeatAvailability = seatAvailability;
+        return PricingCategory == pricingCategory;
+    }
+
+    public void Allocate()
+    {
+        if (SeatAvailability == SeatAvailability.Available) SeatAvailability = SeatAvailability.Allocated;
     }
 }

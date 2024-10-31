@@ -4,5 +4,5 @@ public enum SeatAvailability
 {
     Reserved,
     Available,
-    Suggested
+    Allocated
 }
