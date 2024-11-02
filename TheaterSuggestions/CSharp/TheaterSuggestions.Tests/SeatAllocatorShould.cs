@@ -15,11 +15,11 @@ namespace SeatsSuggestions.Tests
         [Test]
         public void Suggest_two_seats_when_Auditorium_contains_all_available_seats()
         {
-            // New Amsterdam-8
+            // Lincoln-17
             //     1   2   3   4   5   6   7   8   9  10
             //  A: 2   2   1   1   1   1   1   1   2   2
             //  B: 2   2   1   1   1   1   1   1   2   2
-            const string showId = "8";
+            const string showId = "17";
             var auditoriumLayoutAdapter =
                 new AuditoriumSeatingAdapter(new AuditoriumLayoutRepository(), new ReservationsProvider());
             

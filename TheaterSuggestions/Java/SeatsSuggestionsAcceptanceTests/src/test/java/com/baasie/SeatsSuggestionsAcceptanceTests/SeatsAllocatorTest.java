@@ -15,12 +15,12 @@ public class SeatsAllocatorTest {
 
     @Test
     public void Suggest_two_seats_when_Auditorium_contains_all_available_seats() throws IOException {
-        // New Amsterdam-8
+        // Lincoln-17
         //
         //     1   2   3   4   5   6   7   8   9  10
         //  A: 2   2   1   1   1   1   1   1   2   2
         //  B: 2   2   1   1   1   1   1   1   2   2
-        final String showId = "8";
+        final String showId = "17";
         AuditoriumSeatingAdapter auditoriumLayoutAdapter =
                 new AuditoriumSeatingAdapter(new AuditoriumLayoutRepository(), new ReservationsProvider());
 
