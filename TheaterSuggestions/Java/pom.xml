@@ -3,8 +3,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.baasie</groupId>
-    <artifactId>SeatsSuggestionsParent</artifactId>
+    <groupId>org.weaveit</groupId>
+    <artifactId>SeatingPlaceSuggestionsParent</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
 
@@ -15,61 +15,50 @@
 
     <modules>
         <module>ExternalDependencies</module>
-        <module>SeatsSuggestions</module>
-        <module>SeatsSuggestionsAcceptanceTests</module>
+        <module>SeatingPlaceSuggestions</module>
+        <module>SeatingPlaceSuggestionsAcceptanceTests</module>
     </modules>
 
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>com.baasie</groupId>
-                <artifactId>SeatsSuggestions</artifactId>
+                <groupId>org.weaveit</groupId>
+                <artifactId>SeatingPlaceSuggestions</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.baasie</groupId>
+                <groupId>org.weaveit</groupId>
+                <artifactId>SeatingPlaceSuggestionsAcceptanceTests</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.weaveit</groupId>
                 <artifactId>ExternalDependencies</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>org.projectlombok</groupId>
-                <artifactId>lombok</artifactId>
-                <version>1.18.32</version>
-                <scope>provided</scope>
-            </dependency>
-            <dependency>
                 <groupId>com.fasterxml.jackson.core</groupId>
                 <artifactId>jackson-core</artifactId>
-                <version>2.17.0</version>
+                <version>2.13.5</version>
             </dependency>
             <dependency>
                 <groupId>com.fasterxml.jackson.core</groupId>
                 <artifactId>jackson-databind</artifactId>
-                <version>2.17.0</version>
-            </dependency>
-            <dependency>
-                <groupId>com.fasterxml.jackson.datatype</groupId>
-                <artifactId>jackson-datatype-guava</artifactId>
-                <version>2.17.0</version>
-            </dependency>
-            <dependency>
-                <groupId>com.google.guava</groupId>
-                <artifactId>guava</artifactId>
-                <version>33.1.0-jre</version>
+                <version>2.14.2</version>
             </dependency>
 
             <!-- TEST dependencies -->
             <dependency>
-                <groupId>junit</groupId>
-                <artifactId>junit</artifactId>
-                <version>4.12</version>
+                <groupId>org.junit.jupiter</groupId>
+                <artifactId>junit-jupiter-engine</artifactId>
+                <version>5.9.1</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>org.assertj</groupId>
                 <artifactId>assertj-core</artifactId>
-                <version>3.25.3</version>
+                <version>3.24.2</version>
                 <scope>test</scope>
             </dependency>
         </dependencies>
@@ -81,8 +70,8 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
-                    <source>8</source>
-                    <target>8</target>
+                    <source>17</source>
+                    <target>17</target>
                 </configuration>
             </plugin>
         </plugins>

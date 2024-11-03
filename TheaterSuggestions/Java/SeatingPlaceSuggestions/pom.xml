@@ -10,20 +10,16 @@
     </parent>
 
     <packaging>jar</packaging>
-    <artifactId>ExternalDependencies</artifactId>
+    <artifactId>SeatingPlaceSuggestions</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>ExternalDependencies</name>
-
+    <name>SeatingPlaceSuggestions</name>
 
     <dependencies>
         <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-core</artifactId>
+            <groupId>org.weaveit</groupId>
+            <artifactId>ExternalDependencies</artifactId>
         </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
-        </dependency>
+
 
         <!-- TEST dependencies -->
         <dependency>
@@ -35,10 +31,9 @@
         <dependency>
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
-            <version>3.24.2</version>
             <scope>test</scope>
         </dependency>
-    </dependencies>
 
+    </dependencies>
 
 </project>
