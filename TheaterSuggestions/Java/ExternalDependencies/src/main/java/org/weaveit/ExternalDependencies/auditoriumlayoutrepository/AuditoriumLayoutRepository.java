@@ -1,19 +1,19 @@
-package com.baasie.ExternalDependencies.auditoriumlayoutrepository;
+package org.weaveit.ExternalDependencies.auditoriumlayoutrepository;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.datatype.guava.GuavaModule;
 
 import java.io.IOException;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
 public class AuditoriumLayoutRepository {
 
-    private Map<String, AuditoriumDto> repository = new HashMap<>();
+    private final Map<String, AuditoriumDto> repository = new HashMap<>();
 
     public AuditoriumLayoutRepository() throws IOException {
         String jsonDirectory = Paths.get(System.getProperty("user.dir")).getParent().getParent().getParent().toString() + "/Stubs/AuditoriumLayouts";
@@ -23,25 +23,25 @@ public class AuditoriumLayoutRepository {
         for (Path path : directoryStream) {
             if (path.toString().contains("_theater.json")) {
                 String fileName = path.getFileName().toString();
-                ObjectMapper mapper = new ObjectMapper().registerModule(new GuavaModule());
+                ObjectMapper mapper = new ObjectMapper();
                 repository.put(fileName.split("-")[0], mapper.readValue(path.toFile(), AuditoriumDto.class));
             }
         }
     }
 
-    public AuditoriumDto GetAuditoriumLayoutFor(String showId) {
+    public AuditoriumDto getAuditoriumLayoutFor(String showId) {
         if (repository.containsKey(showId)) {
             return repository.get(showId);
         }
-        return new AuditoriumDto();
+        return new AuditoriumDto(Collections.emptyMap(), Collections.emptyList());
     }
 
-    public AuditoriumDto getAuditoriumSeatingFor(String showId) {
+    public AuditoriumDto findByShowId(String showId) {
         if (repository.containsKey(showId))
         {
             return repository.get(showId);
         }
 
-        return new AuditoriumDto();
+        return new AuditoriumDto(Collections.emptyMap(), Collections.emptyList());
     }
 }

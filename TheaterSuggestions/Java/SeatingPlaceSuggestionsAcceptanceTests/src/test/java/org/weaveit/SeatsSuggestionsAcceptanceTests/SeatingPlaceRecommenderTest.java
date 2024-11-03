@@ -1,14 +1,16 @@
-package com.baasie.SeatsSuggestionsAcceptanceTests;
+package org.weaveit.SeatsSuggestionsAcceptanceTests;
 
-import com.baasie.ExternalDependencies.auditoriumlayoutrepository.AuditoriumLayoutRepository;
-import com.baasie.ExternalDependencies.reservationsprovider.ReservationsProvider;
-import org.junit.Test;
+import org.weaveit.ExternalDependencies.auditoriumlayoutrepository.AuditoriumLayoutRepository;
+import org.weaveit.ExternalDependencies.reservationsprovider.ReservationsProvider;
+import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 
-import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
-public class SeatsAllocatorTest {
+import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+
+public class SeatingPlaceRecommenderTest {
     /*
      *  Business Rule - Only Suggest available seats
      */
@@ -21,11 +23,11 @@ public class SeatsAllocatorTest {
         //  A: 2   2   1   1   1   1   1   1   2   2
         //  B: 2   2   1   1   1   1   1   1   2   2
         final String showId = "17";
-        AuditoriumSeatingAdapter auditoriumLayoutAdapter =
-                new AuditoriumSeatingAdapter(new AuditoriumLayoutRepository(), new ReservationsProvider());
+        AuditoriumSeatings auditoriumSeatings =
+                new AuditoriumSeatings(new AuditoriumLayoutRepository(), new ReservationsProvider());
 
         // Remove this assertion to the expected one with outcome : A1, A2
-        AuditoriumSeating auditoriumSeating = auditoriumLayoutAdapter.getAuditoriumSeating(showId);
+        AuditoriumSeating auditoriumSeating = auditoriumSeatings.findByShowId(showId);
        assertThat(auditoriumSeating.rows()).hasSize(2);
     }
     @Test
@@ -35,11 +37,11 @@ public class SeatsAllocatorTest {
         //  A : (2) (2)  1  (1) (1) (1) (1) (1) (2) (2)
         //  B : (2) (2) (1) (1) (1) (1) (1) (1) (2) (2)
         final String showId = "1";
-        AuditoriumSeatingAdapter auditoriumLayoutAdapter =
-                new AuditoriumSeatingAdapter(new AuditoriumLayoutRepository(), new ReservationsProvider());
+        AuditoriumSeatings auditoriumSeatings =
+                new AuditoriumSeatings(new AuditoriumLayoutRepository(), new ReservationsProvider());
 
         // Remove this assertion to the expected one with outcome : A3
-        AuditoriumSeating auditoriumSeating = auditoriumLayoutAdapter.getAuditoriumSeating(showId);
+        AuditoriumSeating auditoriumSeating = auditoriumSeatings.findByShowId(showId);
         assertThat(auditoriumSeating.rows()).hasSize(2);
     }
 
@@ -50,11 +52,11 @@ public class SeatsAllocatorTest {
         // A : (2) (2) (1) (1) (1) (1) (1) (1) (2) (2)
         // B : (2) (2) (1) (1) (1) (1) (1) (1) (2) (2)
         final String showId = "5";
-        AuditoriumSeatingAdapter auditoriumLayoutAdapter =
-                new AuditoriumSeatingAdapter(new AuditoriumLayoutRepository(), new ReservationsProvider());
+        AuditoriumSeatings auditoriumSeatings =
+                new AuditoriumSeatings(new AuditoriumLayoutRepository(), new ReservationsProvider());
 
         // Remove this assertion to the expected one with outcome : SuggestionNotAvailable
-        AuditoriumSeating auditoriumSeating = auditoriumLayoutAdapter.getAuditoriumSeating(showId);
+        AuditoriumSeating auditoriumSeating = auditoriumSeatings.findByShowId(showId);
         assertThat(auditoriumSeating.rows()).hasSize(2);
     }
 
@@ -69,14 +71,14 @@ public class SeatsAllocatorTest {
         //  E: 3   3   3   3   3   3   3   3   3   3
         //  F: 3   3   3   3   3   3   3   3   3   3
         final String showId = "18";
-       AuditoriumSeatingAdapter auditoriumLayoutAdapter =
-               new AuditoriumSeatingAdapter(new AuditoriumLayoutRepository(), new ReservationsProvider());
+       AuditoriumSeatings auditoriumSeatings =
+               new AuditoriumSeatings(new AuditoriumLayoutRepository(), new ReservationsProvider());
 
        // Remove this assertion to the expected one with outcome :
        // PricingCategory.First => "A3", "A4", "A5"
        // PricingCategory.Second => "A1", "A2", "A9"
        // PricingCategory.Third => "E1", "E2", "E3"
-        AuditoriumSeating auditoriumSeating = auditoriumLayoutAdapter.getAuditoriumSeating(showId);
+        AuditoriumSeating auditoriumSeating = auditoriumSeatings.findByShowId(showId);
        assertThat(auditoriumSeating.rows()).hasSize(6);
     }
 }
