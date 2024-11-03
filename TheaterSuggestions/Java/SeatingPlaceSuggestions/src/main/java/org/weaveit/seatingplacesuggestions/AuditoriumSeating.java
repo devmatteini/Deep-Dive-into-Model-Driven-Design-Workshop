@@ -14,7 +14,6 @@ public class AuditoriumSeating {
             var seatingOptionSuggested = row.suggestSeatingOption(partyRequested, pricingCategory);
 
             if (seatingOptionSuggested.matchExpectation()) {
-                // Cool, we mark the seat as Allocated (that we turns into a SuggestionMode)
                 return seatingOptionSuggested;
             }
         }

@@ -3,10 +3,10 @@ package org.weaveit.seatingplacesuggestions;
 import java.util.*;
 
 public class SuggestionsMade {
-    private String showId;
-    private int partyRequested;
+    private final String showId;
+    private final int partyRequested;
 
-    public Map<PricingCategory, List<SuggestionMade>> forCategory = new HashMap<>();
+    private final Map<PricingCategory, List<SuggestionMade>> forCategory = new HashMap<>();
 
     public SuggestionsMade(String showId, int partyRequested) {
         this.showId = showId;
@@ -30,7 +30,7 @@ public class SuggestionsMade {
     }
 
     public boolean matchExpectations() {
-        return forCategory.values().stream().flatMap(List::stream).anyMatch(SuggestionMade::MatchExpectation);
+        return forCategory.values().stream().flatMap(List::stream).anyMatch(SuggestionMade::matchExpectation);
     }
 
     public String showId() {

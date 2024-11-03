@@ -30,18 +30,18 @@ public class AuditoriumSeatings {
 
     private AuditoriumSeating adapt(AuditoriumDto auditoriumDto, ReservedSeatsDto reservedSeatsDto) {
 
-        Map<String, Row> rows = new HashMap<>();
+        var rows = new HashMap<String, Row>();
 
 
         for (Map.Entry<String, List<SeatDto>> rowDto : auditoriumDto.rows().entrySet()) {
             List<SeatingPlace> seats = new ArrayList<>();
 
             rowDto.getValue().forEach(seatDto -> {
-                String rowName = rowDto.getKey();
-                int number = extractNumber(seatDto.name());
-                PricingCategory pricingCategory = convertCategory(seatDto.category());
+                var rowName = rowDto.getKey();
+                var number = extractNumber(seatDto.name());
+                var pricingCategory = convertCategory(seatDto.category());
 
-                boolean isReserved = reservedSeatsDto.reservedSeats().contains(seatDto.name());
+                var isReserved = reservedSeatsDto.reservedSeats().contains(seatDto.name());
 
                 seats.add(new SeatingPlace(rowName, number, pricingCategory, isReserved ? SeatingPlaceAvailability.RESERVED : SeatingPlaceAvailability.AVAILABLE));
             });

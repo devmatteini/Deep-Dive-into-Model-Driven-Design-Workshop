@@ -2,9 +2,9 @@ package org.weaveit.seatingplacesuggestions;
 
 public class SeatingPlace {
 
-    private String rowName;
-    private int number;
-    private PricingCategory pricingCategory;
+    private final String rowName;
+    private final int number;
+    private final PricingCategory pricingCategory;
     private SeatingPlaceAvailability seatingPlaceAvailability;
 
     public SeatingPlace(String rowName, int number, PricingCategory pricingCategory, SeatingPlaceAvailability seatingPlaceAvailability) {

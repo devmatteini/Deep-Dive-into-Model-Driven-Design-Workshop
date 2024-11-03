@@ -26,7 +26,7 @@ public enum PricingCategory {
     }
 
     public static PricingCategory valueOf(int pageType) {
-        PricingCategory category = map.get(pageType);
+        var category = map.get(pageType);
         if (category == null) {
             throw new IllegalArgumentException("No enum constant with value " + pageType);
         }

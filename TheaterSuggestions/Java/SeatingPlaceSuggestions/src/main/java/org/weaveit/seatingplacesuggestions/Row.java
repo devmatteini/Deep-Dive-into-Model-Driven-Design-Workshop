@@ -4,7 +4,7 @@ import java.util.List;
 
 public class Row {
     private String name;
-    private List<SeatingPlace> seatingPlaces;
+    private final List<SeatingPlace> seatingPlaces;
 
     public Row(String name, List<SeatingPlace> seatingPlaces) {
         this.name = name;
