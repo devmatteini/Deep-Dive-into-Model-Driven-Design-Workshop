@@ -1,6 +1,6 @@
 ﻿namespace SeatsSuggestions;
 
-public enum SeatAvailability
+public enum SeatingPlaceAvailability
 {
     Reserved,
     Available,

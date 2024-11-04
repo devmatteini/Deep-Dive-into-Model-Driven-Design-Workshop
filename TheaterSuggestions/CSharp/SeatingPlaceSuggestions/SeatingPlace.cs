@@ -1,23 +1,23 @@
 ﻿namespace SeatsSuggestions;
 
-public class Seat
+public class SeatingPlace
 {
-    public Seat(string rowName, uint number, PricingCategory pricingCategory, SeatAvailability seatAvailability)
+    public SeatingPlace(string rowName, uint number, PricingCategory pricingCategory, SeatingPlaceAvailability seatingPlaceAvailability)
     {
         RowName = rowName;
         Number = number;
         PricingCategory = pricingCategory;
-        SeatAvailability = seatAvailability;
+        SeatingPlaceAvailability = seatingPlaceAvailability;
     }
 
     public string RowName { get; }
     public uint Number { get; }
     public PricingCategory PricingCategory { get; }
-    private SeatAvailability SeatAvailability { get; set; }
+    private SeatingPlaceAvailability SeatingPlaceAvailability { get; set; }
 
     public bool IsAvailable()
     {
-        return SeatAvailability == SeatAvailability.Available;
+        return SeatingPlaceAvailability == SeatingPlaceAvailability.Available;
     }
 
     public override string ToString()
@@ -32,6 +32,6 @@ public class Seat
 
     public void Allocate()
     {
-        if (SeatAvailability == SeatAvailability.Available) SeatAvailability = SeatAvailability.Allocated;
+        if (SeatingPlaceAvailability == SeatingPlaceAvailability.Available) SeatingPlaceAvailability = SeatingPlaceAvailability.Allocated;
     }
 }

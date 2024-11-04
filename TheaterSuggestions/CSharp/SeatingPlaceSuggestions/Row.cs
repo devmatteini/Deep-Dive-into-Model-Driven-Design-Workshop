@@ -1,15 +1,15 @@
 ﻿namespace SeatsSuggestions;
 
-public class Row(string name, List<Seat> seats)
+public class Row(string name, List<SeatingPlace> seats)
 {
     public string Name { get; } = name;
-    public List<Seat> Seats { get; } = seats;
+    public List<SeatingPlace> SeatingPlaces { get; } = seats;
 
     public SeatingOptionSuggested SuggestSeatingOption(int partyRequested, PricingCategory pricingCategory)
     { 
         var seatAllocation = new SeatingOptionSuggested(partyRequested, pricingCategory);
         
-        foreach (var seat in Seats)
+        foreach (var seat in SeatingPlaces)
         {
             if (seat.IsAvailable() && seat.MatchCategory(pricingCategory))
             {
@@ -18,5 +18,10 @@ public class Row(string name, List<Seat> seats)
             }
         }
         return new SeatingOptionNotAvailable(partyRequested, pricingCategory);
+    }
+
+    public void AddSeat(SeatingPlace seatingPlace)
+    {
+        SeatingPlaces.Add(seatingPlace);
     }
 }

@@ -5,12 +5,12 @@
 /// </summary>
 public class SuggestionMade(SeatingOptionSuggested seatingOptionSuggested)
 {
-    private readonly List<Seat> _suggestedSeats = seatingOptionSuggested.Seats;
+    private readonly List<SeatingPlace> _suggestedSeats = seatingOptionSuggested.Seats;
 
     public int PartyRequested { get; } = seatingOptionSuggested.PartyRequested;
     public PricingCategory PricingCategory { get; } = seatingOptionSuggested.PricingCategory;
 
-    public IReadOnlyList<Seat> SuggestedSeats => _suggestedSeats;
+    public IReadOnlyList<SeatingPlace> SuggestedSeats => _suggestedSeats;
 
     public IEnumerable<string> SeatNames()
     {

@@ -1,11 +1,11 @@
 ﻿namespace SeatsSuggestions;
 
-public class SeatAllocator
+public class SeatingPlaceRecommender
 {
     private const int NumberOfSuggestions = 3;
     private readonly AuditoriumSeatingAdapter _auditoriumSeatingAdapter;
 
-    public SeatAllocator(AuditoriumSeatingAdapter auditoriumSeatingAdapter)
+    public SeatingPlaceRecommender(AuditoriumSeatingAdapter auditoriumSeatingAdapter)
     {
         _auditoriumSeatingAdapter = auditoriumSeatingAdapter;
     }

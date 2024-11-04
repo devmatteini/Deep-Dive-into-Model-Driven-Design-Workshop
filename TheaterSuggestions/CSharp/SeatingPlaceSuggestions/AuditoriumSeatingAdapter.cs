@@ -33,10 +33,10 @@ public class AuditoriumSeatingAdapter
 
             var isReserved = reservedSeatsDto.ReservedSeats.Contains(seatDto.Name);
 
-            if (!rows.ContainsKey(rowName)) rows[rowName] = new Row(rowName, new List<Seat>());
+            if (!rows.ContainsKey(rowName)) rows[rowName] = new Row(rowName, new List<SeatingPlace>());
 
-            rows[rowName].Seats.Add(new Seat(rowName, number, pricingCategory,
-                isReserved ? SeatAvailability.Reserved : SeatAvailability.Available));
+            rows[rowName].SeatingPlaces.Add(new SeatingPlace(rowName, number, pricingCategory,
+                isReserved ? SeatingPlaceAvailability.Reserved : SeatingPlaceAvailability.Available));
         }
 
         return new AuditoriumSeating(rows);

@@ -6,7 +6,7 @@ using NUnit.Framework;
 namespace SeatsSuggestions.Tests.AcceptanceTests
 {
     [TestFixture]
-    public class SeatAllocatorShould
+    public class SeatingPlaceRecommenderShould
     {
         [Test]
         public void Suggest_two_seats_when_Auditorium_contains_all_available_seats()
@@ -20,8 +20,8 @@ namespace SeatsSuggestions.Tests.AcceptanceTests
             const int numberOfSuggestions = 1;
             
             var auditoriumSeatingAdapter = new AuditoriumSeatingAdapter(new AuditoriumLayoutRepository(), new ReservationsProvider());
-            var seatAllocator = new SeatAllocator(auditoriumSeatingAdapter);
-            var suggestionsMade = seatAllocator.MakeSuggestions(showId, partyRequested, numberOfSuggestions);
+            var seatingPlaceRecommender = new SeatingPlaceRecommender(auditoriumSeatingAdapter);
+            var suggestionsMade = seatingPlaceRecommender.MakeSuggestions(showId, partyRequested, numberOfSuggestions);
 
             var seatNames = suggestionsMade.SeatNames(PricingCategory.Second);
             Check.That(seatNames).ContainsExactly("A1", "A2");
@@ -41,9 +41,9 @@ namespace SeatsSuggestions.Tests.AcceptanceTests
             var auditoriumLayoutAdapter =
                 new AuditoriumSeatingAdapter(new AuditoriumLayoutRepository(), new ReservationsProvider());
 
-            var seatAllocator = new SeatAllocator(auditoriumLayoutAdapter);
+            var seatingPlaceRecommender = new SeatingPlaceRecommender(auditoriumLayoutAdapter);
 
-            var suggestionsMade = seatAllocator.MakeSuggestions(showId, partyRequested);
+            var suggestionsMade = seatingPlaceRecommender.MakeSuggestions(showId, partyRequested);
 
             Check.That(suggestionsMade.SeatNames(PricingCategory.First)).ContainsExactly("A3");
         }
@@ -62,9 +62,9 @@ namespace SeatsSuggestions.Tests.AcceptanceTests
             var auditoriumLayoutAdapter =
                 new AuditoriumSeatingAdapter(new AuditoriumLayoutRepository(), new ReservationsProvider());
 
-            var seatAllocator = new SeatAllocator(auditoriumLayoutAdapter);
+            var seatingPlaceRecommender = new SeatingPlaceRecommender(auditoriumLayoutAdapter);
 
-            var suggestionsMade = seatAllocator.MakeSuggestions(showId, partyRequested);
+            var suggestionsMade = seatingPlaceRecommender.MakeSuggestions(showId, partyRequested);
             Check.That(suggestionsMade.PartyRequested).IsEqualTo(partyRequested);
             Check.That(suggestionsMade.ShowId).IsEqualTo(showId);
 
@@ -89,9 +89,9 @@ namespace SeatsSuggestions.Tests.AcceptanceTests
             var auditoriumLayoutAdapter =
                 new AuditoriumSeatingAdapter(new AuditoriumLayoutRepository(), new ReservationsProvider());
 
-            var seatAllocator = new SeatAllocator(auditoriumLayoutAdapter);
+            var seatingPlaceRecommender = new SeatingPlaceRecommender(auditoriumLayoutAdapter);
 
-            var suggestionsMade = seatAllocator.MakeSuggestions(eventId, partyRequested);
+            var suggestionsMade = seatingPlaceRecommender.MakeSuggestions(eventId, partyRequested);
 
             Check.That(suggestionsMade.SeatNames(PricingCategory.First)).ContainsExactly("A3", "A4", "A5");
             Check.That(suggestionsMade.SeatNames(PricingCategory.Second)).ContainsExactly("A1", "A2", "A9");

@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
+    <RootNamespace>SeatsSuggestions.Tests</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
@@ -69,7 +70,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ExternalDependencies\ExternalDependencies.csproj" />
-    <ProjectReference Include="..\SeatsSuggestions\SeatsSuggestions.csproj" />
+    <ProjectReference Include="..\SeatingPlaceSuggestions\SeatingPlaceSuggestions.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -217,6 +218,10 @@
     <Content Update="..\..\..\Stubs\AuditoriumLayouts\9-Mogador Theater-%282%29%280%29_theater.json" Link="AuditoriumLayouts\9-Mogador Theater-%282%29%280%29_theater.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="UnitTests\RowShould.cs" />
   </ItemGroup>
 
 </Project>

@@ -9,12 +9,12 @@ public class SeatingOptionSuggested
     }
 
     public PricingCategory PricingCategory { get; }
-    public List<Seat> Seats { get; } = new();
+    public List<SeatingPlace> Seats { get; } = new();
     public int PartyRequested { get; }
 
-    public void AddSeat(Seat seat)
+    public void AddSeat(SeatingPlace seatingPlace)
     {
-        Seats.Add(seat);
+        Seats.Add(seatingPlace);
     }
 
     public bool MatchExpectation()
