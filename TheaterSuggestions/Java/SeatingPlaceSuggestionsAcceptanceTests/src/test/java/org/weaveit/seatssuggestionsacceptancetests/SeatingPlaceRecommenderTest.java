@@ -29,6 +29,7 @@ public class SeatingPlaceRecommenderTest {
         AuditoriumSeating auditoriumSeating = auditoriumSeatings.findByShowId(showId);
        assertThat(auditoriumSeating.rows()).hasSize(2);
     }
+
     @Test
     public void should_suggest_one_seat_when_Auditorium_contains_one_available_seat_only() throws IOException {
         // Ford Auditorium-1
