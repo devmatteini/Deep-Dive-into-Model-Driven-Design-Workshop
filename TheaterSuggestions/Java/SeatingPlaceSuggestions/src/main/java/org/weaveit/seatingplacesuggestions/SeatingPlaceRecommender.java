@@ -18,9 +18,9 @@ public class SeatingPlaceRecommender {
 
         suggestionsMade.add(giveMeSuggestionsFor(auditoriumSeating, partyRequested,
                 PricingCategory.FIRST));
-        suggestionsMade.add(giveMeSuggestionsFor(auditoriumSeating,partyRequested,
+        suggestionsMade.add(giveMeSuggestionsFor(auditoriumSeating, partyRequested,
                 PricingCategory.SECOND));
-        suggestionsMade.add(giveMeSuggestionsFor(auditoriumSeating,partyRequested,
+        suggestionsMade.add(giveMeSuggestionsFor(auditoriumSeating, partyRequested,
                 PricingCategory.THIRD));
 
         if (suggestionsMade.matchExpectations())

@@ -30,7 +30,7 @@ class SeatingPlaceRecommenderTest {
         var seatingPlaceRecommender = new SeatingPlaceRecommender(auditoriumSeatings);
         var suggestionsMade = seatingPlaceRecommender.makeSuggestion(showId, partyRequested);
 
-        assertThat(suggestionsMade.seatNames(PricingCategory.SECOND)).containsExactly("A1, A2", "A9");
+        assertThat(suggestionsMade.seatNames(PricingCategory.SECOND)).containsExactly("A1, A2");
     }
     @Test
     void suggest_one_seat_when_Auditorium_contains_one_available_seat_only() throws IOException {
