@@ -1,11 +1,10 @@
-package org.weaveit.SeatsSuggestionsAcceptanceTests;
+package org.weaveit.seatssuggestionsacceptancetests;
 
-import java.util.HashMap;
 import java.util.Map;
 
 public class AuditoriumSeating {
 
-    private Map<String, Row> rows;
+    private final Map<String, Row> rows;
 
     public AuditoriumSeating(Map<String, Row> rows) {
         this.rows = rows;
