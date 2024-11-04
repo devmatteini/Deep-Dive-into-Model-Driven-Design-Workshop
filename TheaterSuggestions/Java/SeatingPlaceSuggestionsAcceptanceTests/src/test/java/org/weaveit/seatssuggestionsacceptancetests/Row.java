@@ -1,4 +1,4 @@
-package org.weaveit.SeatsSuggestionsAcceptanceTests;
+package org.weaveit.seatssuggestionsacceptancetests;
 
 import java.util.ArrayList;
 import java.util.List;

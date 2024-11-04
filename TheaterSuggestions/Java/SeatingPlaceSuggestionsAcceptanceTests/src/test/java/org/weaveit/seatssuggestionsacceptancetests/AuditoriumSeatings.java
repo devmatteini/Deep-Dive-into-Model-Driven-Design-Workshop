@@ -1,10 +1,10 @@
-package org.weaveit.SeatsSuggestionsAcceptanceTests;
+package org.weaveit.seatssuggestionsacceptancetests;
 
-import org.weaveit.ExternalDependencies.auditoriumlayoutrepository.AuditoriumDto;
-import org.weaveit.ExternalDependencies.auditoriumlayoutrepository.AuditoriumLayoutRepository;
-import org.weaveit.ExternalDependencies.auditoriumlayoutrepository.SeatDto;
-import org.weaveit.ExternalDependencies.reservationsprovider.ReservationsProvider;
-import org.weaveit.ExternalDependencies.reservationsprovider.ReservedSeatsDto;
+import org.weaveit.externaldependencies.auditoriumlayoutrepository.AuditoriumDto;
+import org.weaveit.externaldependencies.auditoriumlayoutrepository.AuditoriumLayoutRepository;
+import org.weaveit.externaldependencies.auditoriumlayoutrepository.SeatDto;
+import org.weaveit.externaldependencies.reservationsprovider.ReservationsProvider;
+import org.weaveit.externaldependencies.reservationsprovider.ReservedSeatsDto;
 
 import java.util.ArrayList;
 import java.util.HashMap;

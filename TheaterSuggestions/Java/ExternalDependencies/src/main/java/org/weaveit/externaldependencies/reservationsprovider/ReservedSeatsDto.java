@@ -1,4 +1,4 @@
-package org.weaveit.ExternalDependencies.reservationsprovider;
+package org.weaveit.externaldependencies.reservationsprovider;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
