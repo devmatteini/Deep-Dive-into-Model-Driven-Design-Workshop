@@ -12,6 +12,7 @@ public class Row {
     }
 
     public SeatingOptionSuggested suggestSeatingOption(int partyRequested, PricingCategory pricingCategory) {
+
         var seatAllocation = new SeatingOptionSuggested(partyRequested, pricingCategory);
 
         for (var seat : seatingPlaces) {

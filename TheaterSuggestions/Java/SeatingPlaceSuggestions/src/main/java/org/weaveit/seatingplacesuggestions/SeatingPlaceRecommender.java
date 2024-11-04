@@ -12,16 +12,19 @@ public class SeatingPlaceRecommender {
     }
 
     public SuggestionsMade makeSuggestion(String showId, int partyRequested) {
+        return makeSuggestion(showId, partyRequested, NUMBER_OF_SUGGESTIONS);
+    }
+    public SuggestionsMade makeSuggestion(String showId, int partyRequested, int numberOfSuggestions) {
         var auditoriumSeating = auditoriumSeatings.findByShowId(showId);
 
         var suggestionsMade = new SuggestionsMade(showId, partyRequested);
 
         suggestionsMade.add(giveMeSuggestionsFor(auditoriumSeating, partyRequested,
-                PricingCategory.FIRST));
+                PricingCategory.FIRST, numberOfSuggestions));
         suggestionsMade.add(giveMeSuggestionsFor(auditoriumSeating, partyRequested,
-                PricingCategory.SECOND));
+                PricingCategory.SECOND, numberOfSuggestions));
         suggestionsMade.add(giveMeSuggestionsFor(auditoriumSeating, partyRequested,
-                PricingCategory.THIRD));
+                PricingCategory.THIRD, numberOfSuggestions));
 
         if (suggestionsMade.matchExpectations())
             return suggestionsMade;
@@ -30,10 +33,10 @@ public class SeatingPlaceRecommender {
     }
 
     private static List<SuggestionMade> giveMeSuggestionsFor(
-            AuditoriumSeating auditoriumSeating, int partyRequested,  PricingCategory pricingCategory) {
+            AuditoriumSeating auditoriumSeating, int partyRequested, PricingCategory pricingCategory, int numberOfSuggestions) {
         var foundedSuggestions = new ArrayList<SuggestionMade>();
 
-        for (int i = 0; i < NUMBER_OF_SUGGESTIONS; i++) {
+        for (int i = 0; i < numberOfSuggestions; i++) {
             var seatingOptionSuggested = auditoriumSeating.suggestSeatingOptionFor(partyRequested, pricingCategory);
 
             if (seatingOptionSuggested.matchExpectation()) {

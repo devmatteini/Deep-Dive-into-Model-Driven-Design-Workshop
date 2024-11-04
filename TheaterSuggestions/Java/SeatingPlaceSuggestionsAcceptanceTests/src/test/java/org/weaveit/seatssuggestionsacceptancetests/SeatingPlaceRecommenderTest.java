@@ -23,6 +23,7 @@ class SeatingPlaceRecommenderTest {
         //  B : (2) (2) (1) (1) (1) (1) (1) (1) (2) (2)
         final String showId = "1";
         final int partyRequested = 1;
+        final int nbN = 1;
 
         var auditoriumSeatings =
                 new AuditoriumSeatings(new AuditoriumLayoutRepository(), new ReservationsProvider());
