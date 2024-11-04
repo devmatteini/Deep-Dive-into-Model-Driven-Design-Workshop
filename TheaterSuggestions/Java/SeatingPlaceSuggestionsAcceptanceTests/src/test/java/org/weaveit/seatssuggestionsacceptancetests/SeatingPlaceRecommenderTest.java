@@ -14,7 +14,23 @@ class SeatingPlaceRecommenderTest {
     /*
      *  Business Rule - Only Suggest available seats
      */
+    @Test
+    public void Suggest_two_seats_when_Auditorium_contains_all_available_seats() throws IOException {
+        // Lincoln Auditorium-17
+        //     1   2   3   4   5   6   7   8   9  10
+        //  A: 2   2   1   1   1   1   1   1   2   2
+        //  B: 2   2   1   1   1   1   1   1   2   2
+        final String showId = "17";
+        final int partyRequested = 2;
+        final int numberOfSuggestSeats = 1;
 
+        var auditoriumSeatings =
+                new AuditoriumSeatings(new AuditoriumLayoutRepository(), new ReservationsProvider());
+        var seatingPlaceRecommender = new SeatingPlaceRecommender(auditoriumSeatings);
+        var suggestionsMade = seatingPlaceRecommender.makeSuggestion(showId, partyRequested, numberOfSuggestSeats);
+
+        assertThat(suggestionsMade.seatNames(PricingCategory.SECOND)).containsExactly("A1", "A2");
+    }
     @Test
     void suggest_one_seat_when_Auditorium_contains_one_available_seat_only() throws IOException {
         // Ford Auditorium-1
@@ -23,7 +39,6 @@ class SeatingPlaceRecommenderTest {
         //  B : (2) (2) (1) (1) (1) (1) (1) (1) (2) (2)
         final String showId = "1";
         final int partyRequested = 1;
-        final int nbN = 1;
 
         var auditoriumSeatings =
                 new AuditoriumSeatings(new AuditoriumLayoutRepository(), new ReservationsProvider());
