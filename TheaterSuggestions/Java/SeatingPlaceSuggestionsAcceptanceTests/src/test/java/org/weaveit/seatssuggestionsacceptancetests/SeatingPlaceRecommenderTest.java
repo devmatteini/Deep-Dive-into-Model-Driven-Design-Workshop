@@ -14,6 +14,7 @@ class SeatingPlaceRecommenderTest {
     /*
      *  Business Rule - Only Suggest available seats
      */
+
     @Test
     public void Suggest_two_seats_when_Auditorium_contains_all_available_seats() throws IOException {
         // Lincoln Auditorium-17
