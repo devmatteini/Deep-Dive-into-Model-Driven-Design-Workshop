@@ -1,13 +1,12 @@
-package org.weaveit.SeatsSuggestionsAcceptanceTests;
+package org.weaveit.seatssuggestionsacceptancetests;
 
-import org.weaveit.ExternalDependencies.auditoriumlayoutrepository.AuditoriumLayoutRepository;
-import org.weaveit.ExternalDependencies.reservationsprovider.ReservationsProvider;
+import org.weaveit.externaldependencies.auditoriumlayoutrepository.AuditoriumLayoutRepository;
+import org.weaveit.externaldependencies.reservationsprovider.ReservationsProvider;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class SeatingPlaceRecommenderTest {
