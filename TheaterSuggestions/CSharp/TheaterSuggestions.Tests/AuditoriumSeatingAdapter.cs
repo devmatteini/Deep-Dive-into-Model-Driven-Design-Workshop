@@ -41,8 +41,8 @@ public class AuditoriumSeatingAdapter
                         rows[rowName] = new Row();
                     }
 
-                    rows[rowName].Seats.Add(new Seat(rowName, number, pricingCategory,
-                        isReserved ? SeatAvailability.Reserved : SeatAvailability.Available));
+                    rows[rowName].Seats.Add(new SeatingPlace(rowName, number, pricingCategory,
+                        isReserved ? SeatingPlaceAvailability.Reserved : SeatingPlaceAvailability.Available));
                 }
             }
 

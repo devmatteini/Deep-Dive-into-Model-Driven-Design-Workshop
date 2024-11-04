@@ -7,6 +7,6 @@ namespace SeatsSuggestions.Tests
     public class Row
     {
         public string Name { get; set; }
-        public List<Seat> Seats { get; set; } = new List<Seat>();
+        public List<SeatingPlace> Seats { get; set; } = new List<SeatingPlace>();
     }
 }

@@ -6,7 +6,7 @@ using NUnit.Framework;
 namespace SeatsSuggestions.Tests
 {
     [TestFixture]
-    public class SeatAllocatorShould
+    public class SeatingPlaceRecommenderShould
     {
         /*
          *  Business Rule - Only Suggest available seats
