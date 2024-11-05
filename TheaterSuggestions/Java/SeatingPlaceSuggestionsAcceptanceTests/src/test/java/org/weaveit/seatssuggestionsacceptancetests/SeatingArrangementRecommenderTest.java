@@ -24,12 +24,12 @@ class SeatingArrangementRecommenderTest {
         final String showId = "1";
         final int partyRequested = 1;
 
-        var auditoriumSeatings =
+        var auditoriumSeatingArrangements =
                 new AuditoriumSeatingArrangements(new AuditoriumLayoutRepository(), new ReservationsProvider());
-        var seatingPlaceRecommender = new SeatingArrangementRecommender(auditoriumSeatings);
-        var suggestionsMade = seatingPlaceRecommender.makeSuggestion(showId, partyRequested);
+        var seatingArrangementRecommender = new SeatingArrangementRecommender(auditoriumSeatingArrangements);
+        var suggestionsAreMade = seatingArrangementRecommender.makeSuggestion(showId, partyRequested);
 
-        assertThat(suggestionsMade.seatNames(PricingCategory.FIRST)).containsExactly("A3");
+        assertThat(suggestionsAreMade.seatNames(PricingCategory.FIRST)).containsExactly("A3");
     }
 
     @Test
@@ -41,14 +41,14 @@ class SeatingArrangementRecommenderTest {
         final String showId = "5";
         final int partyRequested = 1;
 
-        var auditoriumSeatings =
+        var auditoriumSeatingArrangements =
                 new AuditoriumSeatingArrangements(new AuditoriumLayoutRepository(), new ReservationsProvider());
-        var seatingPlaceRecommender = new SeatingArrangementRecommender(auditoriumSeatings);
-        var suggestionsMade = seatingPlaceRecommender.makeSuggestion(showId, partyRequested);
+        var seatingArrangementRecommender = new SeatingArrangementRecommender(auditoriumSeatingArrangements);
+        var suggestionsAreMade = seatingArrangementRecommender.makeSuggestion(showId, partyRequested);
 
-        assertEquals(partyRequested, suggestionsMade.partyRequested(), "Party requested should match");
-        assertEquals(showId, suggestionsMade.showId(), "Show ID should match");
-        assertInstanceOf(SuggestionsAreAreNotAvailable.class, suggestionsMade, "Suggestions made should be an instance of SuggestionNotAvailable");
+        assertEquals(partyRequested, suggestionsAreMade.partyRequested(), "Party requested should match");
+        assertEquals(showId, suggestionsAreMade.showId(), "Show ID should match");
+        assertInstanceOf(SuggestionsAreAreNotAvailable.class, suggestionsAreMade, "Suggestions made should be an instance of SuggestionNotAvailable");
     }
 
     @Test
@@ -61,12 +61,12 @@ class SeatingArrangementRecommenderTest {
         final String showId = "17";
         final int partyRequested = 2;
 
-        var auditoriumSeatings =
+        var auditoriumSeatingArrangements =
                 new AuditoriumSeatingArrangements(new AuditoriumLayoutRepository(), new ReservationsProvider());
-        var seatingPlaceRecommender = new SeatingArrangementRecommender(auditoriumSeatings);
-        var suggestionsMade = seatingPlaceRecommender.makeSuggestion(showId, partyRequested);
+        var seatingArrangementRecommender = new SeatingArrangementRecommender(auditoriumSeatingArrangements);
+        var suggestionsAreMade = seatingArrangementRecommender.makeSuggestion(showId, partyRequested);
 
-        assertThat(suggestionsMade.seatNames(PricingCategory.SECOND)).containsExactly("A1", "A2", "A9", "A10", "B1", "B2");
+        assertThat(suggestionsAreMade.seatNames(PricingCategory.SECOND)).containsExactly("A1", "A2", "A9", "A10", "B1", "B2");
     }
 
    @Test
@@ -82,14 +82,14 @@ class SeatingArrangementRecommenderTest {
        final String showId = "18";
        final int partyRequested = 1;
 
-       var auditoriumSeatings =
+       var auditoriumSeatingArrangements =
                new AuditoriumSeatingArrangements(new AuditoriumLayoutRepository(), new ReservationsProvider());
-       var seatingPlaceRecommender = new SeatingArrangementRecommender(auditoriumSeatings);
-       var suggestionsMade = seatingPlaceRecommender.makeSuggestion(showId, partyRequested);
+       var seatingArrangementRecommender = new SeatingArrangementRecommender(auditoriumSeatingArrangements);
+       var suggestionsAreMade = seatingArrangementRecommender.makeSuggestion(showId, partyRequested);
 
-       assertThat(suggestionsMade.seatNames(PricingCategory.FIRST)).containsExactly("A3","A4","A5");
-       assertThat(suggestionsMade.seatNames(PricingCategory.SECOND)).containsExactly("A1", "A2", "A9");
-       assertThat(suggestionsMade.seatNames(PricingCategory.THIRD)).containsExactly("E1", "E2", "E3");
+       assertThat(suggestionsAreMade.seatNames(PricingCategory.FIRST)).containsExactly("A3","A4","A5");
+       assertThat(suggestionsAreMade.seatNames(PricingCategory.SECOND)).containsExactly("A1", "A2", "A9");
+       assertThat(suggestionsAreMade.seatNames(PricingCategory.THIRD)).containsExactly("E1", "E2", "E3");
     }
 }
 

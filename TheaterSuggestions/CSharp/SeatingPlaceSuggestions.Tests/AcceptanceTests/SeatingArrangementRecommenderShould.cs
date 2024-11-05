@@ -20,14 +20,12 @@ namespace SeatsSuggestions.Tests.AcceptanceTests
             const string showId = "1";
             const int partyRequested = 1;
 
-            var auditoriumLayoutAdapter =
+            var auditoriumSeatingArrangements =
                 new AuditoriumSeatingArrangements(new AuditoriumLayoutRepository(), new ReservationsProvider());
+            var seatingArrangementRecommender = new SeatingArrangementRecommender(auditoriumSeatingArrangements);
+            var suggestionsAreMade = seatingArrangementRecommender.MakeSuggestions(showId, partyRequested);
 
-            var seatingPlaceRecommender = new SeatingArrangementRecommender(auditoriumLayoutAdapter);
-
-            var suggestionsMade = seatingPlaceRecommender.MakeSuggestions(showId, partyRequested);
-
-            Check.That(suggestionsMade.SeatNames(PricingCategory.First)).ContainsExactly("A3");
+            Check.That(suggestionsAreMade.SeatNames(PricingCategory.First)).ContainsExactly("A3");
         }
         
         [Test]
@@ -41,16 +39,15 @@ namespace SeatsSuggestions.Tests.AcceptanceTests
             const string showId = "5";
             const int partyRequested = 1;
 
-            var auditoriumLayoutAdapter =
+            var auditoriumSeatingArrangements =
                 new AuditoriumSeatingArrangements(new AuditoriumLayoutRepository(), new ReservationsProvider());
+            var seatingArrangementRecommender = new SeatingArrangementRecommender(auditoriumSeatingArrangements);
+            var suggestionsAreMade = seatingArrangementRecommender.MakeSuggestions(showId, partyRequested);
 
-            var seatingPlaceRecommender = new SeatingArrangementRecommender(auditoriumLayoutAdapter);
+            Check.That(suggestionsAreMade.PartyRequested).IsEqualTo(partyRequested);
+            Check.That(suggestionsAreMade.ShowId).IsEqualTo(showId);
 
-            var suggestionsMade = seatingPlaceRecommender.MakeSuggestions(showId, partyRequested);
-            Check.That(suggestionsMade.PartyRequested).IsEqualTo(partyRequested);
-            Check.That(suggestionsMade.ShowId).IsEqualTo(showId);
-
-            Check.That(suggestionsMade).IsInstanceOf<SuggestionsAreNotAvailable>();
+            Check.That(suggestionsAreMade).IsInstanceOf<SuggestionsAreNotAvailable>();
         }
         
         [Test]
@@ -63,11 +60,13 @@ namespace SeatsSuggestions.Tests.AcceptanceTests
             const string showId = "17";
             const int partyRequested = 2;
             
-            var auditoriumSeatingAdapter = new AuditoriumSeatingArrangements(new AuditoriumLayoutRepository(), new ReservationsProvider());
-            var seatingPlaceRecommender = new SeatingArrangementRecommender(auditoriumSeatingAdapter);
-            var suggestionsMade = seatingPlaceRecommender.MakeSuggestions(showId, partyRequested);
+            var auditoriumSeatingArrangements =
+                new AuditoriumSeatingArrangements(new AuditoriumLayoutRepository(), new ReservationsProvider());
+            var seatingArrangementRecommender = new SeatingArrangementRecommender(auditoriumSeatingArrangements);
+            var suggestionsAreMade = seatingArrangementRecommender.MakeSuggestions(showId, partyRequested);
 
-            var seatNames = suggestionsMade.SeatNames(PricingCategory.Second);
+
+            var seatNames = suggestionsAreMade.SeatNames(PricingCategory.Second);
             Check.That(seatNames).ContainsExactly("A1", "A2", "A9", "A10", "B1", "B2");
         }
 
@@ -83,19 +82,17 @@ namespace SeatsSuggestions.Tests.AcceptanceTests
             //  D: 2   2   2   2   2   2   2   2   2   2
             //  E: 3   3   3   3   3   3   3   3   3   3
             //  F: 3   3   3   3   3   3   3   3   3   3
-            const string eventId = "18";
+            const string showId = "18";
             const int partyRequested = 1;
-
-            var auditoriumLayoutAdapter =
+            
+            var auditoriumSeatingArrangements =
                 new AuditoriumSeatingArrangements(new AuditoriumLayoutRepository(), new ReservationsProvider());
+            var seatingArrangementRecommender = new SeatingArrangementRecommender(auditoriumSeatingArrangements);
+            var suggestionsAreMade = seatingArrangementRecommender.MakeSuggestions(showId, partyRequested);
 
-            var seatingPlaceRecommender = new SeatingArrangementRecommender(auditoriumLayoutAdapter);
-
-            var suggestionsMade = seatingPlaceRecommender.MakeSuggestions(eventId, partyRequested);
-
-            Check.That(suggestionsMade.SeatNames(PricingCategory.First)).ContainsExactly("A3", "A4", "A5");
-            Check.That(suggestionsMade.SeatNames(PricingCategory.Second)).ContainsExactly("A1", "A2", "A9");
-            Check.That(suggestionsMade.SeatNames(PricingCategory.Third)).ContainsExactly("E1", "E2", "E3");
+            Check.That(suggestionsAreMade.SeatNames(PricingCategory.First)).ContainsExactly("A3", "A4", "A5");
+            Check.That(suggestionsAreMade.SeatNames(PricingCategory.Second)).ContainsExactly("A1", "A2", "A9");
+            Check.That(suggestionsAreMade.SeatNames(PricingCategory.Third)).ContainsExactly("E1", "E2", "E3");
         }
     }
 }
