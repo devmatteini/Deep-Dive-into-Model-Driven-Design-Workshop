@@ -3,7 +3,7 @@ package org.weaveit.seatingplacesuggestions;
 import java.util.List;
 
 public class Row {
-    private String name;
+    private final String name;
     private final List<SeatingPlace> seatingPlaces;
 
     public Row(String name, List<SeatingPlace> seatingPlaces) {

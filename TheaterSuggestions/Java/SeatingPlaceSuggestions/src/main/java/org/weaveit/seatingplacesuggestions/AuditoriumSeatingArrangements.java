@@ -11,27 +11,26 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class AuditoriumSeatings {
+public class AuditoriumSeatingArrangements {
 
     private final ReservationsProvider reservedSeatsRepository;
     private final AuditoriumLayoutRepository auditoriumLayoutRepository;
 
 
-    public AuditoriumSeatings(AuditoriumLayoutRepository auditoriumLayoutRepository, ReservationsProvider reservationsProvider) {
+    public AuditoriumSeatingArrangements(AuditoriumLayoutRepository auditoriumLayoutRepository, ReservationsProvider reservationsProvider) {
         this.auditoriumLayoutRepository = auditoriumLayoutRepository;
         this.reservedSeatsRepository = reservationsProvider;
     }
 
-    public AuditoriumSeating findByShowId(String showId) {
+    public AuditoriumSeatingArrangement findByShowId(String showId) {
         return adapt(auditoriumLayoutRepository.findByShowId(showId),
                 reservedSeatsRepository.getReservedSeats(showId));
 
     }
 
-    private AuditoriumSeating adapt(AuditoriumDto auditoriumDto, ReservedSeatsDto reservedSeatsDto) {
+    private AuditoriumSeatingArrangement adapt(AuditoriumDto auditoriumDto, ReservedSeatsDto reservedSeatsDto) {
 
         var rows = new HashMap<String, Row>();
-
 
         for (Map.Entry<String, List<SeatDto>> rowDto : auditoriumDto.rows().entrySet()) {
             List<SeatingPlace> seats = new ArrayList<>();
@@ -49,7 +48,7 @@ public class AuditoriumSeatings {
             rows.put(rowDto.getKey(), new Row(rowDto.getKey(), seats));
         }
 
-        return new AuditoriumSeating(rows);
+        return new AuditoriumSeatingArrangement(rows);
     }
 
     private static PricingCategory convertCategory(int seatDtoCategory) {

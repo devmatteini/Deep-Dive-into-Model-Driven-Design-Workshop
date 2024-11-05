@@ -3,28 +3,25 @@ package org.weaveit.seatingplacesuggestions;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SeatingPlaceRecommender {
+public class SeatingArrangementRecommender {
     private static final int NUMBER_OF_SUGGESTIONS = 3;
-    private final AuditoriumSeatings auditoriumSeatings;
+    private final AuditoriumSeatingArrangements auditoriumSeatingArrangements;
 
-    public SeatingPlaceRecommender(AuditoriumSeatings auditoriumSeatings) {
-        this.auditoriumSeatings = auditoriumSeatings;
+    public SeatingArrangementRecommender(AuditoriumSeatingArrangements auditoriumSeatingArrangements) {
+        this.auditoriumSeatingArrangements = auditoriumSeatingArrangements;
     }
 
     public SuggestionsMade makeSuggestion(String showId, int partyRequested) {
-        return makeSuggestion(showId, partyRequested, NUMBER_OF_SUGGESTIONS);
-    }
-    public SuggestionsMade makeSuggestion(String showId, int partyRequested, int numberOfSuggestions) {
-        var auditoriumSeating = auditoriumSeatings.findByShowId(showId);
+        var auditoriumSeating = auditoriumSeatingArrangements.findByShowId(showId);
 
         var suggestionsMade = new SuggestionsMade(showId, partyRequested);
 
         suggestionsMade.add(giveMeSuggestionsFor(auditoriumSeating, partyRequested,
-                PricingCategory.FIRST, numberOfSuggestions));
+                PricingCategory.FIRST));
         suggestionsMade.add(giveMeSuggestionsFor(auditoriumSeating, partyRequested,
-                PricingCategory.SECOND, numberOfSuggestions));
+                PricingCategory.SECOND));
         suggestionsMade.add(giveMeSuggestionsFor(auditoriumSeating, partyRequested,
-                PricingCategory.THIRD, numberOfSuggestions));
+                PricingCategory.THIRD));
 
         if (suggestionsMade.matchExpectations())
             return suggestionsMade;
@@ -33,11 +30,11 @@ public class SeatingPlaceRecommender {
     }
 
     private static List<SuggestionMade> giveMeSuggestionsFor(
-            AuditoriumSeating auditoriumSeating, int partyRequested, PricingCategory pricingCategory, int numberOfSuggestions) {
+            AuditoriumSeatingArrangement auditoriumSeatingArrangement, int partyRequested, PricingCategory pricingCategory) {
         var foundedSuggestions = new ArrayList<SuggestionMade>();
 
-        for (int i = 0; i < numberOfSuggestions; i++) {
-            var seatingOptionSuggested = auditoriumSeating.suggestSeatingOptionFor(partyRequested, pricingCategory);
+        for (int i = 0; i < NUMBER_OF_SUGGESTIONS; i++) {
+            var seatingOptionSuggested = auditoriumSeatingArrangement.suggestSeatingOptionFor(partyRequested, pricingCategory);
 
             if (seatingOptionSuggested.matchExpectation()) {
                 for (var seatingPlace : seatingOptionSuggested.seats()) {

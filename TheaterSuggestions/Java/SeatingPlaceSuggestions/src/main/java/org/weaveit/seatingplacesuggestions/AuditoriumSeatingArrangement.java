@@ -2,10 +2,10 @@ package org.weaveit.seatingplacesuggestions;
 
 import java.util.Map;
 
-public class AuditoriumSeating {
+public class AuditoriumSeatingArrangement {
     private final Map<String, Row> rows;
 
-    public AuditoriumSeating(Map<String, Row> rows) {
+    public AuditoriumSeatingArrangement(Map<String, Row> rows) {
         this.rows = rows;
     }
 
