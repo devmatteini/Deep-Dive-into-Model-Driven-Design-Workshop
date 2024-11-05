@@ -69,7 +69,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ExternalDependencies\ExternalDependencies.csproj" />
-    <ProjectReference Include="..\SeatingPlaceSuggestions\SeatingPlaceSuggestions.csproj" />
+    <ProjectReference Include="..\ScreeningSeatingArrangementSuggestions\ScreeningSeatingArrangementSuggestions.csproj" />
   </ItemGroup>
 
   <ItemGroup>
