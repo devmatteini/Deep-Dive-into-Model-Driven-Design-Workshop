@@ -5,12 +5,12 @@
 
     <parent>
         <groupId>org.weaveit</groupId>
-        <artifactId>SeatingPlaceSuggestionsParent</artifactId>
+        <artifactId>ScreeningSeatingArrangementSuggestionsParent</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
     <packaging>jar</packaging>
-    <artifactId>SeatingPlaceSuggestionsAcceptanceTests</artifactId>
+    <artifactId>ScreeningSeatingArrangementSuggestionsAcceptanceTests</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>SeatingPlaceSuggestionsAcceptanceTests</name>
 

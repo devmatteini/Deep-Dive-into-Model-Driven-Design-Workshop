@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.weaveit</groupId>
-    <artifactId>SeatingPlaceSuggestionsParent</artifactId>
+    <artifactId>ScreeningSeatingArrangementSuggestionsParent</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
 
@@ -15,16 +15,11 @@
 
     <modules>
         <module>ExternalDependencies</module>
-        <module>SeatingPlaceSuggestionsAcceptanceTests</module>
+        <module>ScreeningSeatingArrangementSuggestionsAcceptanceTests</module>
     </modules>
 
     <dependencyManagement>
         <dependencies>
-            <dependency>
-                <groupId>org.weaveit</groupId>
-                <artifactId>SeatingPlaceSuggestions</artifactId>
-                <version>${project.version}</version>
-            </dependency>
             <dependency>
                 <groupId>org.weaveit</groupId>
                 <artifactId>ExternalDependencies</artifactId>
