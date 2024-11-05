@@ -1,8 +1,8 @@
 ﻿using SeatsSuggestions;
 
-public class SeatingOptionSuggested
+public class SeatingOptionIsSuggested
 {
-    public SeatingOptionSuggested(int partyRequested, PricingCategory priceCategory)
+    public SeatingOptionIsSuggested(int partyRequested, PricingCategory priceCategory)
     {
         PartyRequested = partyRequested;
         PricingCategory = priceCategory;

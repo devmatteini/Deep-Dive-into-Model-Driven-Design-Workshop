@@ -3,12 +3,12 @@
 /// <summary>
 ///     Occurs when a Suggestion is made.
 /// </summary>
-public class SuggestionMade(SeatingOptionSuggested seatingOptionSuggested)
+public class SuggestionIsMade(SeatingOptionIsSuggested seatingOptionIsSuggested)
 {
-    private readonly List<SeatingPlace> _suggestedSeats = seatingOptionSuggested.Seats;
+    private readonly List<SeatingPlace> _suggestedSeats = seatingOptionIsSuggested.Seats;
 
-    public int PartyRequested { get; } = seatingOptionSuggested.PartyRequested;
-    public PricingCategory PricingCategory { get; } = seatingOptionSuggested.PricingCategory;
+    public int PartyRequested { get; } = seatingOptionIsSuggested.PartyRequested;
+    public PricingCategory PricingCategory { get; } = seatingOptionIsSuggested.PricingCategory;
 
     public IReadOnlyList<SeatingPlace> SuggestedSeats => _suggestedSeats;
 

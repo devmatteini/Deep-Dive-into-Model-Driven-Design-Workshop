@@ -48,7 +48,7 @@ class SeatingArrangementRecommenderTest {
 
         assertEquals(partyRequested, suggestionsMade.partyRequested(), "Party requested should match");
         assertEquals(showId, suggestionsMade.showId(), "Show ID should match");
-        assertInstanceOf(SuggestionNotAvailable.class, suggestionsMade, "Suggestions made should be an instance of SuggestionNotAvailable");
+        assertInstanceOf(SuggestionsAreAreNotAvailable.class, suggestionsMade, "Suggestions made should be an instance of SuggestionNotAvailable");
     }
 
     @Test

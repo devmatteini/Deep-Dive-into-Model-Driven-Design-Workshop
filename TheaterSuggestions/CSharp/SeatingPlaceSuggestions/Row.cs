@@ -5,9 +5,9 @@ public class Row(string name, List<SeatingPlace> seats)
     public string Name { get; } = name;
     public List<SeatingPlace> SeatingPlaces { get; } = seats;
 
-    public SeatingOptionSuggested SuggestSeatingOption(int partyRequested, PricingCategory pricingCategory)
+    public SeatingOptionIsSuggested SuggestSeatingOption(int partyRequested, PricingCategory pricingCategory)
     { 
-        var seatAllocation = new SeatingOptionSuggested(partyRequested, pricingCategory);
+        var seatAllocation = new SeatingOptionIsSuggested(partyRequested, pricingCategory);
         
         foreach (var seat in SeatingPlaces)
         {
@@ -17,7 +17,7 @@ public class Row(string name, List<SeatingPlace> seats)
                 if (seatAllocation.MatchExpectation()) return seatAllocation;
             }
         }
-        return new SeatingOptionNotAvailable(partyRequested, pricingCategory);
+        return new SeatingOptionIsNotAvailable(partyRequested, pricingCategory);
     }
 
     public void AddSeat(SeatingPlace seatingPlace)

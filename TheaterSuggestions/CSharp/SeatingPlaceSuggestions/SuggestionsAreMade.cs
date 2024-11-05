@@ -3,9 +3,9 @@
 /// <summary>
 ///     Occurs when a bunch of Suggestion are made.
 /// </summary>
-public class SuggestionsMade
+public class SuggestionsAreMade
 {
-    public SuggestionsMade(string showId, int partyRequested)
+    public SuggestionsAreMade(string showId, int partyRequested)
     {
         ShowId = showId;
         PartyRequested = partyRequested;
@@ -16,7 +16,7 @@ public class SuggestionsMade
     public string ShowId { get; }
     public int PartyRequested { get; }
 
-    private Dictionary<PricingCategory, List<SuggestionMade>> ForCategory { get; } = new();
+    private Dictionary<PricingCategory, List<SuggestionIsMade>> ForCategory { get; } = new();
 
     public IEnumerable<string> SeatNames(PricingCategory pricingCategory)
     {
@@ -26,10 +26,10 @@ public class SuggestionsMade
     private void InstantiateAnEmptyListForEveryPricingCategory()
     {
         foreach (PricingCategory pricingCategory in Enum.GetValues(typeof(PricingCategory)))
-            ForCategory[pricingCategory] = new List<SuggestionMade>();
+            ForCategory[pricingCategory] = new List<SuggestionIsMade>();
     }
 
-    public void Add(IEnumerable<SuggestionMade> suggestions)
+    public void Add(IEnumerable<SuggestionIsMade> suggestions)
     {
         foreach (var suggestionMade in suggestions) ForCategory[suggestionMade.PricingCategory].Add(suggestionMade);
     }

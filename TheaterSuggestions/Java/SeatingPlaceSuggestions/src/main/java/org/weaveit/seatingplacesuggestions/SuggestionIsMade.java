@@ -2,16 +2,16 @@ package org.weaveit.seatingplacesuggestions;
 
 import java.util.List;
 
-public class SuggestionMade {
+public class SuggestionIsMade {
 
     private final List<SeatingPlace> suggestedSeats;
     private final int partyRequested;
     private final PricingCategory pricingCategory;
 
-    public SuggestionMade(SeatingOptionSuggested seatingOptionSuggested) {
-        this.suggestedSeats = seatingOptionSuggested.seats();
-        this.partyRequested = seatingOptionSuggested.partyRequested();
-        this.pricingCategory = seatingOptionSuggested.pricingCategory();
+    public SuggestionIsMade(SeatingOptionIsSuggested seatingOptionIsSuggested) {
+        this.suggestedSeats = seatingOptionIsSuggested.seats();
+        this.partyRequested = seatingOptionIsSuggested.partyRequested();
+        this.pricingCategory = seatingOptionIsSuggested.pricingCategory();
     }
 
     public List<String> seatNames() {

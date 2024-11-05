@@ -9,7 +9,7 @@ public class AuditoriumSeatingArrangement {
         this.rows = rows;
     }
 
-    public SeatingOptionSuggested suggestSeatingOptionFor(int partyRequested, PricingCategory pricingCategory) {
+    public SeatingOptionIsSuggested suggestSeatingOptionFor(int partyRequested, PricingCategory pricingCategory) {
         for (Row row : rows.values()) {
             var seatingOptionSuggested = row.suggestSeatingOption(partyRequested, pricingCategory);
 
@@ -18,6 +18,6 @@ public class AuditoriumSeatingArrangement {
             }
         }
 
-        return new SeatingOptionNotAvailable(partyRequested, pricingCategory);
+        return new SeatingOptionIsNotAvailable(partyRequested, pricingCategory);
     }
 }

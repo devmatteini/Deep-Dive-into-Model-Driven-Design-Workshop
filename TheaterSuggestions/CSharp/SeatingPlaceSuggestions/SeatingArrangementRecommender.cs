@@ -10,11 +10,11 @@ public class SeatingArrangementRecommender
         _auditoriumSeatingArrangements = auditoriumSeatingArrangements;
     }
 
-    public SuggestionsMade MakeSuggestions(string showId, int partyRequested)
+    public SuggestionsAreMade MakeSuggestions(string showId, int partyRequested)
     {
         var auditoriumSeating = _auditoriumSeatingArrangements.FindByShowId(showId);
 
-        var suggestionsMade = new SuggestionsMade(showId, partyRequested);
+        var suggestionsMade = new SuggestionsAreMade(showId, partyRequested);
 
         suggestionsMade.Add(GiveMeSuggestionsFor(auditoriumSeating, partyRequested, PricingCategory.First));
         suggestionsMade.Add(GiveMeSuggestionsFor(auditoriumSeating, partyRequested, PricingCategory.Second));
@@ -22,14 +22,14 @@ public class SeatingArrangementRecommender
 
         if (suggestionsMade.MatchExpectations()) return suggestionsMade;
 
-        return new SuggestionNotAvailable(showId, partyRequested);
+        return new SuggestionsAreNotAvailable(showId, partyRequested);
     }
 
-    private static IEnumerable<SuggestionMade> GiveMeSuggestionsFor(AuditoriumSeatingArrangement auditoriumSeatingArrangement,
+    private static IEnumerable<SuggestionIsMade> GiveMeSuggestionsFor(AuditoriumSeatingArrangement auditoriumSeatingArrangement,
         int partyRequested,
         PricingCategory pricingCategory)
     {
-        var foundedSuggestions = new List<SuggestionMade>();
+        var foundedSuggestions = new List<SuggestionIsMade>();
 
         for (var i = 0; i < NumberOfSuggestions; i++)
         {
@@ -42,7 +42,7 @@ public class SeatingArrangementRecommender
                     seat.Allocate();
                 }
 
-                foundedSuggestions.Add(new SuggestionMade(seatingOptionSuggested));
+                foundedSuggestions.Add(new SuggestionIsMade(seatingOptionSuggested));
             }
         }
 

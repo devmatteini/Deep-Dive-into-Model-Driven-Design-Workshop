@@ -4,7 +4,7 @@ public class AuditoriumSeatingArrangement(Dictionary<string, Row> rows)
 {
     public IReadOnlyDictionary<string, Row> Rows => rows;
 
-    public SeatingOptionSuggested SuggestSeatingOptionFor(int partyRequested, PricingCategory pricingCategory)
+    public SeatingOptionIsSuggested SuggestSeatingOptionFor(int partyRequested, PricingCategory pricingCategory)
     {
         foreach (var row in rows.Values)
         {
@@ -13,6 +13,6 @@ public class AuditoriumSeatingArrangement(Dictionary<string, Row> rows)
             if (seatOptionsSuggested.MatchExpectation()) return seatOptionsSuggested;
         }
 
-        return new SeatingOptionNotAvailable(partyRequested, pricingCategory);
+        return new SeatingOptionIsNotAvailable(partyRequested, pricingCategory);
     }
 }

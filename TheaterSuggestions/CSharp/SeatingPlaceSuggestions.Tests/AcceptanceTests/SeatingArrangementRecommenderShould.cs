@@ -50,7 +50,7 @@ namespace SeatsSuggestions.Tests.AcceptanceTests
             Check.That(suggestionsMade.PartyRequested).IsEqualTo(partyRequested);
             Check.That(suggestionsMade.ShowId).IsEqualTo(showId);
 
-            Check.That(suggestionsMade).IsInstanceOf<SuggestionNotAvailable>();
+            Check.That(suggestionsMade).IsInstanceOf<SuggestionsAreNotAvailable>();
         }
         
         [Test]

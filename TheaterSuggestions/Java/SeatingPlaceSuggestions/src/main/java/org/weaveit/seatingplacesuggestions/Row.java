@@ -11,9 +11,9 @@ public class Row {
         this.seatingPlaces = seatingPlaces;
     }
 
-    public SeatingOptionSuggested suggestSeatingOption(int partyRequested, PricingCategory pricingCategory) {
+    public SeatingOptionIsSuggested suggestSeatingOption(int partyRequested, PricingCategory pricingCategory) {
 
-        var seatAllocation = new SeatingOptionSuggested(partyRequested, pricingCategory);
+        var seatAllocation = new SeatingOptionIsSuggested(partyRequested, pricingCategory);
 
         for (var seat : seatingPlaces) {
             if (seat.isAvailable() && seat.matchCategory(pricingCategory)) {
@@ -24,7 +24,7 @@ public class Row {
 
             }
         }
-        return new SeatingOptionNotAvailable(partyRequested, pricingCategory);
+        return new SeatingOptionIsNotAvailable(partyRequested, pricingCategory);
     }
 
 }

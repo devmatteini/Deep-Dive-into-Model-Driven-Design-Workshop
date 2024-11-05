@@ -3,13 +3,13 @@ package org.weaveit.seatingplacesuggestions;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SeatingOptionSuggested {
+public class SeatingOptionIsSuggested {
 
     private final PricingCategory pricingCategory;
     private final List<SeatingPlace> seats = new ArrayList<>();
     private final int partyRequested;
 
-    public SeatingOptionSuggested(int partyRequested, PricingCategory pricingCategory) {
+    public SeatingOptionIsSuggested(int partyRequested, PricingCategory pricingCategory) {
         this.pricingCategory = pricingCategory;
         this.partyRequested = partyRequested;
     }

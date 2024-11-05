@@ -2,13 +2,13 @@ package org.weaveit.seatingplacesuggestions;
 
 import java.util.*;
 
-public class SuggestionsMade {
+public class SuggestionsAreMade {
     private final String showId;
     private final int partyRequested;
 
-    private final Map<PricingCategory, List<SuggestionMade>> forCategory = new HashMap<>();
+    private final Map<PricingCategory, List<SuggestionIsMade>> forCategory = new HashMap<>();
 
-    public SuggestionsMade(String showId, int partyRequested) {
+    public SuggestionsAreMade(String showId, int partyRequested) {
         this.showId = showId;
         this.partyRequested = partyRequested;
 
@@ -16,7 +16,7 @@ public class SuggestionsMade {
     }
 
     public List<String> seatNames(PricingCategory pricingCategory) {
-        return forCategory.get(pricingCategory).stream().map(SuggestionMade::seatNames).flatMap(Collection::stream).toList();
+        return forCategory.get(pricingCategory).stream().map(SuggestionIsMade::seatNames).flatMap(Collection::stream).toList();
     }
 
     private void instantiateAnEmptyListForEveryPricingCategory() {
@@ -25,12 +25,12 @@ public class SuggestionsMade {
         }
     }
 
-    public void add(Iterable<SuggestionMade> suggestions) {
-        suggestions.forEach(suggestionMade -> forCategory.get(suggestionMade.pricingCategory()).add(suggestionMade));
+    public void add(Iterable<SuggestionIsMade> suggestions) {
+        suggestions.forEach(suggestionIsMade -> forCategory.get(suggestionIsMade.pricingCategory()).add(suggestionIsMade));
     }
 
     public boolean matchExpectations() {
-        return forCategory.values().stream().flatMap(List::stream).anyMatch(SuggestionMade::matchExpectation);
+        return forCategory.values().stream().flatMap(List::stream).anyMatch(SuggestionIsMade::matchExpectation);
     }
 
     public String showId() {
