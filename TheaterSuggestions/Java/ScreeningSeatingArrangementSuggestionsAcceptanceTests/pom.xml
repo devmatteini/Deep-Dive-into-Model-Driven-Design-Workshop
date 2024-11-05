@@ -10,14 +10,18 @@
     </parent>
 
     <packaging>jar</packaging>
-    <artifactId>SeatingPlaceSuggestions</artifactId>
+    <artifactId>ScreeningSeatingArrangementSuggestionsAcceptanceTests</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>SeatingPlaceSuggestions</name>
+    <name>SeatingPlaceSuggestionsAcceptanceTests</name>
 
     <dependencies>
         <dependency>
             <groupId>org.weaveit</groupId>
             <artifactId>ExternalDependencies</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.weaveit</groupId>
+            <artifactId>ScreeningSeatingArrangementSuggestions</artifactId>
         </dependency>
 
 

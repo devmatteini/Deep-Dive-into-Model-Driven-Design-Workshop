@@ -15,20 +15,20 @@
 
     <modules>
         <module>ExternalDependencies</module>
-        <module>SeatingPlaceSuggestions</module>
-        <module>SeatingPlaceSuggestionsAcceptanceTests</module>
+        <module>ScreeningSeatingArrangementSuggestions</module>
+        <module>ScreeningSeatingArrangementSuggestionsAcceptanceTests</module>
     </modules>
 
     <dependencyManagement>
         <dependencies>
             <dependency>
                 <groupId>org.weaveit</groupId>
-                <artifactId>SeatingPlaceSuggestions</artifactId>
+                <artifactId>ScreeningSeatingArrangementSuggestions</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.weaveit</groupId>
-                <artifactId>SeatingPlaceSuggestionsAcceptanceTests</artifactId>
+                <artifactId>ScreeningSeatingArrangementSuggestionsAcceptanceTests</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
