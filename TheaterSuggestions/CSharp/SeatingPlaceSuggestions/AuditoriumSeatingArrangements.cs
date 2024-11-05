@@ -2,25 +2,25 @@
 using ExternalDependencies.ReservationsProvider;
 using SeatsSuggestions;
 
-public class AuditoriumSeatingAdapter
+public class AuditoriumSeatingArrangements
 {
     private readonly AuditoriumLayoutRepository _auditoriumLayoutRepository;
     private readonly ReservationsProvider _reservedSeatsRepository;
 
-    public AuditoriumSeatingAdapter(AuditoriumLayoutRepository auditoriumLayoutRepository,
+    public AuditoriumSeatingArrangements(AuditoriumLayoutRepository auditoriumLayoutRepository,
         ReservationsProvider reservationsProvider)
     {
         _auditoriumLayoutRepository = auditoriumLayoutRepository;
         _reservedSeatsRepository = reservationsProvider;
     }
 
-    public AuditoriumSeating GetAuditoriumSeating(string showId)
+    public AuditoriumSeatingArrangement FindByShowId(string showId)
     {
         return Adapt(_auditoriumLayoutRepository.GetAuditoriumLayoutFor(showId),
             _reservedSeatsRepository.GetReservedSeats(showId));
     }
 
-    private static AuditoriumSeating Adapt(AuditoriumDto auditoriumDto, ReservedSeatsDto reservedSeatsDto)
+    private static AuditoriumSeatingArrangement Adapt(AuditoriumDto auditoriumDto, ReservedSeatsDto reservedSeatsDto)
     {
         var rows = new Dictionary<string, Row>();
 
@@ -39,7 +39,7 @@ public class AuditoriumSeatingAdapter
                 isReserved ? SeatingPlaceAvailability.Reserved : SeatingPlaceAvailability.Available));
         }
 
-        return new AuditoriumSeating(rows);
+        return new AuditoriumSeatingArrangement(rows);
     }
 
     private static PricingCategory ConvertCategory(int seatDtoCategory)

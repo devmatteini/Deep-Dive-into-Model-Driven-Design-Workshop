@@ -1,6 +1,6 @@
 ﻿namespace SeatsSuggestions;
 
-public class AuditoriumSeating(Dictionary<string, Row> rows)
+public class AuditoriumSeatingArrangement(Dictionary<string, Row> rows)
 {
     public IReadOnlyDictionary<string, Row> Rows => rows;
 

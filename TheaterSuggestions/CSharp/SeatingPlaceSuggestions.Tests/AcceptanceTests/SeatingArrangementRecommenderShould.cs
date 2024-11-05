@@ -6,29 +6,11 @@ using NUnit.Framework;
 namespace SeatsSuggestions.Tests.AcceptanceTests
 {
     [TestFixture]
-    public class SeatingPlaceRecommenderShould
+    public class SeatingArrangementRecommenderShould
     {
-        [Test]
-        public void Suggest_two_seats_when_Auditorium_contains_all_available_seats()
-        {
-            // Lincoln Auditorium-17
-            //     1   2   3   4   5   6   7   8   9  10
-            //  A: 2   2   1   1   1   1   1   1   2   2
-            //  B: 2   2   1   1   1   1   1   1   2   2
-            const string showId = "17";
-            const int partyRequested = 2;
-            const int numberOfSuggestions = 1;
-            
-            var auditoriumSeatingAdapter = new AuditoriumSeatingAdapter(new AuditoriumLayoutRepository(), new ReservationsProvider());
-            var seatingPlaceRecommender = new SeatingPlaceRecommender(auditoriumSeatingAdapter);
-            var suggestionsMade = seatingPlaceRecommender.MakeSuggestions(showId, partyRequested, numberOfSuggestions);
-
-            var seatNames = suggestionsMade.SeatNames(PricingCategory.Second);
-            Check.That(seatNames).ContainsExactly("A1", "A2");
-        }
         
         [Test]
-        public void Suggest_one_seat_when_Auditorium_contains_one_available_seat_only()
+        public void Suggest_one_seatingPlace_when_Auditorium_contains_one_available_seatingPlace()
         {
             // Ford Auditorium-1
             //
@@ -39,9 +21,9 @@ namespace SeatsSuggestions.Tests.AcceptanceTests
             const int partyRequested = 1;
 
             var auditoriumLayoutAdapter =
-                new AuditoriumSeatingAdapter(new AuditoriumLayoutRepository(), new ReservationsProvider());
+                new AuditoriumSeatingArrangements(new AuditoriumLayoutRepository(), new ReservationsProvider());
 
-            var seatingPlaceRecommender = new SeatingPlaceRecommender(auditoriumLayoutAdapter);
+            var seatingPlaceRecommender = new SeatingArrangementRecommender(auditoriumLayoutAdapter);
 
             var suggestionsMade = seatingPlaceRecommender.MakeSuggestions(showId, partyRequested);
 
@@ -49,7 +31,7 @@ namespace SeatsSuggestions.Tests.AcceptanceTests
         }
         
         [Test]
-        public void Return_SeatsNotAvailable_when_Auditorium_has_all_its_seats_already_reserved()
+        public void Return_SuggestionNotAvailable_when_Auditorium_has_all_its_seatingPlaces_reserved()
         {
             // Madison Auditorium-5
             //
@@ -60,9 +42,9 @@ namespace SeatsSuggestions.Tests.AcceptanceTests
             const int partyRequested = 1;
 
             var auditoriumLayoutAdapter =
-                new AuditoriumSeatingAdapter(new AuditoriumLayoutRepository(), new ReservationsProvider());
+                new AuditoriumSeatingArrangements(new AuditoriumLayoutRepository(), new ReservationsProvider());
 
-            var seatingPlaceRecommender = new SeatingPlaceRecommender(auditoriumLayoutAdapter);
+            var seatingPlaceRecommender = new SeatingArrangementRecommender(auditoriumLayoutAdapter);
 
             var suggestionsMade = seatingPlaceRecommender.MakeSuggestions(showId, partyRequested);
             Check.That(suggestionsMade.PartyRequested).IsEqualTo(partyRequested);
@@ -70,9 +52,27 @@ namespace SeatsSuggestions.Tests.AcceptanceTests
 
             Check.That(suggestionsMade).IsInstanceOf<SuggestionNotAvailable>();
         }
+        
+        [Test]
+        public void Suggest_two_seatingPlaces_when_Auditorium_contains_all_available_seatingPlaces()
+        {
+            // Lincoln Auditorium-17
+            //     1   2   3   4   5   6   7   8   9  10
+            //  A: 2   2   1   1   1   1   1   1   2   2
+            //  B: 2   2   1   1   1   1   1   1   2   2
+            const string showId = "17";
+            const int partyRequested = 2;
+            
+            var auditoriumSeatingAdapter = new AuditoriumSeatingArrangements(new AuditoriumLayoutRepository(), new ReservationsProvider());
+            var seatingPlaceRecommender = new SeatingArrangementRecommender(auditoriumSeatingAdapter);
+            var suggestionsMade = seatingPlaceRecommender.MakeSuggestions(showId, partyRequested);
+
+            var seatNames = suggestionsMade.SeatNames(PricingCategory.Second);
+            Check.That(seatNames).ContainsExactly("A1", "A2", "A9", "A10", "B1", "B2");
+        }
 
         [Test]
-        public void Offer_several_suggestions_ie_1_per_PricingCategory_and_other_one_without_category_affinity()
+        public void Suggest_three_availabilities_per_PricingCategory()
         {
             // New Amsterdam-18
             //
@@ -87,9 +87,9 @@ namespace SeatsSuggestions.Tests.AcceptanceTests
             const int partyRequested = 1;
 
             var auditoriumLayoutAdapter =
-                new AuditoriumSeatingAdapter(new AuditoriumLayoutRepository(), new ReservationsProvider());
+                new AuditoriumSeatingArrangements(new AuditoriumLayoutRepository(), new ReservationsProvider());
 
-            var seatingPlaceRecommender = new SeatingPlaceRecommender(auditoriumLayoutAdapter);
+            var seatingPlaceRecommender = new SeatingArrangementRecommender(auditoriumLayoutAdapter);
 
             var suggestionsMade = seatingPlaceRecommender.MakeSuggestions(eventId, partyRequested);
 

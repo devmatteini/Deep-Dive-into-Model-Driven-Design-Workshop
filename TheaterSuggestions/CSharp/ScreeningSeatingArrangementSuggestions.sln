@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.168
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SeatingPalceSuggestions.Tests", "TheaterSuggestions.Tests\SeatingPalceSuggestions.Tests.csproj", "{6B93415E-3024-44A9-9D05-7F0D4191CEB2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SeatingPlaceSuggestions.Tests", "SeatingPlaceSuggestions.Tests\SeatingPlaceSuggestions.Tests.csproj", "{6B93415E-3024-44A9-9D05-7F0D4191CEB2}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExternalDependencies", "ExternalDependencies\ExternalDependencies.csproj", "{92D4BB8C-27AF-4AC0-87FF-7B5E65082EFE}"
 EndProject
