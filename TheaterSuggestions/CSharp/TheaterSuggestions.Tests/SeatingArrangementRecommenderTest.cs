@@ -5,7 +5,7 @@ using NUnit.Framework;
 
 namespace SeatsSuggestions.Tests
 {
-    public class SeatingArrangementRecommenderTest
+    public class SeatingArrangementRecommenderShould
     {
         /*
          *  Business Rule - Only Suggest available seats
