@@ -2,7 +2,8 @@
 
 public class SeatingPlace
 {
-    public SeatingPlace(string rowName, uint number, PricingCategory pricingCategory, SeatingPlaceAvailability seatingPlaceAvailability)
+    public SeatingPlace(string rowName, uint number, PricingCategory pricingCategory,
+        SeatingPlaceAvailability seatingPlaceAvailability)
     {
         RowName = rowName;
         Number = number;
@@ -27,6 +28,7 @@ public class SeatingPlace
 
     public bool MatchCategory(PricingCategory pricingCategory)
     {
+        if (pricingCategory == PricingCategory.Ignore) return true;
         return PricingCategory == pricingCategory;
     }
 
