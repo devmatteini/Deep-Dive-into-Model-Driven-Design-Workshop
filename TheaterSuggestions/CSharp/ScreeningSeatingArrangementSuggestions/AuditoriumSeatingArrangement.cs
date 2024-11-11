@@ -1,6 +1,8 @@
-﻿namespace SeatsSuggestions;
+﻿using Value.Shared;
 
-public class AuditoriumSeatingArrangement(Dictionary<string, Row> rows)
+namespace SeatsSuggestions;
+
+public class AuditoriumSeatingArrangement(Dictionary<string, Row> rows): Value.ValueType<AuditoriumSeatingArrangement>
 {
     public IReadOnlyDictionary<string, Row> Rows => rows;
 
@@ -14,5 +16,10 @@ public class AuditoriumSeatingArrangement(Dictionary<string, Row> rows)
         }
 
         return new SeatingOptionIsNotAvailable(partyRequested, pricingCategory);
+    }
+
+    protected override IEnumerable<object> GetAllAttributesToBeUsedForEquality()
+    {
+        return new object[] { new DictionaryByValue<string, Row>(new Dictionary<string, Row>(Rows)) };
     }
 }

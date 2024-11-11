@@ -61,6 +61,7 @@
     <PackageReference Include="NFluent" Version="3.0.4" />
     <PackageReference Include="NUnit" Version="4.2.2" />
     <PackageReference Include="NUnit3TestAdapter" Version="4.6.0" />
+    <PackageReference Include="Value" Version="1.1.0.1" />
   </ItemGroup>
 
   <ItemGroup>
@@ -217,10 +218,6 @@
     <Content Update="..\..\..\Stubs\AuditoriumLayouts\9-Mogador Theater-%282%29%280%29_theater.json" Link="AuditoriumLayouts\9-Mogador Theater-%282%29%280%29_theater.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Remove="UnitTests\RowShould.cs" />
   </ItemGroup>
 
 </Project>

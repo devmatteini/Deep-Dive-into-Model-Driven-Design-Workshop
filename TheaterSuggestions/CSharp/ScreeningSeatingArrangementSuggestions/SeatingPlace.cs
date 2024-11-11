@@ -1,6 +1,6 @@
 ﻿namespace SeatsSuggestions;
 
-public class SeatingPlace
+public class SeatingPlace : Value.ValueType<SeatingPlace>
 {
     public SeatingPlace(string rowName, uint number, PricingCategory pricingCategory,
         SeatingPlaceAvailability seatingPlaceAvailability)
@@ -14,7 +14,7 @@ public class SeatingPlace
     public string RowName { get; }
     public uint Number { get; }
     public PricingCategory PricingCategory { get; }
-    private SeatingPlaceAvailability SeatingPlaceAvailability { get; set; }
+    private SeatingPlaceAvailability SeatingPlaceAvailability { get; }
 
     public bool IsAvailable()
     {
@@ -32,8 +32,15 @@ public class SeatingPlace
         return PricingCategory == pricingCategory;
     }
 
-    public void Allocate()
+    public SeatingPlace Allocate()
     {
-        if (SeatingPlaceAvailability == SeatingPlaceAvailability.Available) SeatingPlaceAvailability = SeatingPlaceAvailability.Allocated;
+        if (SeatingPlaceAvailability == SeatingPlaceAvailability.Available)
+            return new(RowName, Number, PricingCategory, SeatingPlaceAvailability.Allocated);
+        return this;
+    }
+
+    protected override IEnumerable<object> GetAllAttributesToBeUsedForEquality()
+    {
+        return new object[] { RowName, Number, PricingCategory, SeatingPlaceAvailability };
     }
 }
