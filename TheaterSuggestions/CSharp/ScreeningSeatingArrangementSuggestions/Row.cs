@@ -28,6 +28,13 @@ public class Row(string name, List<SeatingPlace> seats) : Value.ValueType<Row>
         return new(Name, new List<SeatingPlace>(SeatingPlaces) { seatingPlace });
     }
 
+    public Row Allocate(SeatingPlace seatingPlace)
+    {
+        var otherSeatingPlaces = new List<SeatingPlace>(SeatingPlaces).Where(x => x != seatingPlace);
+        var allSeatingPlaces = new List<SeatingPlace>(otherSeatingPlaces) { seatingPlace.Allocate() };
+        return new(Name, allSeatingPlaces);
+    }
+
     protected override IEnumerable<object> GetAllAttributesToBeUsedForEquality()
     {
         return new object[] { Name, new ListByValue<SeatingPlace>(SeatingPlaces) };

@@ -18,6 +18,16 @@ public class AuditoriumSeatingArrangement(Dictionary<string, Row> rows): Value.V
         return new SeatingOptionIsNotAvailable(partyRequested, pricingCategory);
     }
 
+    public AuditoriumSeatingArrangement Allocate(List<SeatingPlace> allocatedSeatingPlaces)
+    {
+        var newVersionOfRows = new Dictionary<string, Row>(Rows);
+        foreach (var seatingPlace in allocatedSeatingPlaces)
+        {
+            newVersionOfRows[seatingPlace.RowName] = newVersionOfRows[seatingPlace.RowName].Allocate(seatingPlace);
+        }
+        return new(newVersionOfRows);
+    }
+
     protected override IEnumerable<object> GetAllAttributesToBeUsedForEquality()
     {
         return new object[] { new DictionaryByValue<string, Row>(new Dictionary<string, Row>(Rows)) };

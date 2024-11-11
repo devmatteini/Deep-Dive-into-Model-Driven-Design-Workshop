@@ -13,11 +13,12 @@ public class SeatingArrangementRecommender
     public SuggestionsAreMade MakeSuggestions(string showId, int partyRequested)
     {
         var suggestionsMade = new SuggestionsAreMade(showId, partyRequested);
+        var auditoriumSeatingArrangement = _auditoriumSeatingArrangements.FindByShowId(showId);
 
-        suggestionsMade.Add(GiveMeSuggestionsFor(_auditoriumSeatingArrangements.FindByShowId(showId), partyRequested, PricingCategory.First));
-        suggestionsMade.Add(GiveMeSuggestionsFor(_auditoriumSeatingArrangements.FindByShowId(showId), partyRequested, PricingCategory.Second));
-        suggestionsMade.Add(GiveMeSuggestionsFor(_auditoriumSeatingArrangements.FindByShowId(showId), partyRequested, PricingCategory.Third));
-        suggestionsMade.Add(GiveMeSuggestionsFor(_auditoriumSeatingArrangements.FindByShowId(showId), partyRequested, PricingCategory.Ignore));
+        suggestionsMade.Add(GiveMeSuggestionsFor(auditoriumSeatingArrangement, partyRequested, PricingCategory.First));
+        suggestionsMade.Add(GiveMeSuggestionsFor(auditoriumSeatingArrangement, partyRequested, PricingCategory.Second));
+        suggestionsMade.Add(GiveMeSuggestionsFor(auditoriumSeatingArrangement, partyRequested, PricingCategory.Third));
+        suggestionsMade.Add(GiveMeSuggestionsFor(auditoriumSeatingArrangement, partyRequested, PricingCategory.Ignore));
 
         if (suggestionsMade.MatchExpectations()) return suggestionsMade;
 
@@ -36,11 +37,7 @@ public class SeatingArrangementRecommender
 
             if (seatingOptionSuggested.MatchExpectation())
             {
-                foreach (var seat in seatingOptionSuggested.Seats)
-                {
-                    seat.Allocate();
-                }
-
+                auditoriumSeatingArrangement = auditoriumSeatingArrangement.Allocate(seatingOptionSuggested.Seats);
                 foundedSuggestions.Add(new SuggestionIsMade(seatingOptionSuggested));
             }
         }
