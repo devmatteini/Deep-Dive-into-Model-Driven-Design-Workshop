@@ -2,7 +2,7 @@
 
 public class SeatingPlace : Value.ValueType<SeatingPlace>
 {
-    public SeatingPlace(string rowName, uint number, PricingCategory pricingCategory,
+    public SeatingPlace(string rowName, int number, PricingCategory pricingCategory,
         SeatingPlaceAvailability seatingPlaceAvailability)
     {
         RowName = rowName;
@@ -12,9 +12,9 @@ public class SeatingPlace : Value.ValueType<SeatingPlace>
     }
 
     public string RowName { get; }
-    public uint Number { get; }
+    public int Number { get; }
     public PricingCategory PricingCategory { get; }
-    private SeatingPlaceAvailability SeatingPlaceAvailability { get; }
+    public SeatingPlaceAvailability SeatingPlaceAvailability { get; }
 
     public bool IsAvailable()
     {

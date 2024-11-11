@@ -47,9 +47,9 @@ public class AuditoriumSeatingArrangements
         return (PricingCategory)seatDtoCategory;
     }
 
-    private static uint ExtractNumber(string name)
+    private static int ExtractNumber(string name)
     {
-        return uint.Parse(name.Substring(1));
+        return int.Parse(name.Substring(1));
     }
 
     private static string ExtractRowName(string name)
