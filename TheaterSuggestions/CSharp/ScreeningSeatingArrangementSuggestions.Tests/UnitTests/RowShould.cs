@@ -47,7 +47,11 @@ public class RowShould
         Check.That(MakeSeatingPlacesWithDistance(row).Select(s => s.DistanceFromMiddleOfRow))
             .ContainsExactly(4, 3, 2, 1, 0, 0, 1, 2, 3, 4);
 
-        var seatingPlaces = OfferSeatsNearerTheMiddleOfTheRow(row, PricingCategory.Ignore).Take(partySize);
+        var seatingPlaces= OfferSeatsNearerTheMiddleOfTheRow(row).OrderBy(s => s.DistanceFromMiddleOfRow)
+            .Select(s => s.SeatingPlace)
+            .Where(s => s.IsAvailable())
+            .Where(s => s.MatchCategory(PricingCategory.Ignore))
+            .Take(partySize);
 
         Check.That(seatingPlaces)
             .ContainsExactly(a5, a6);
@@ -74,7 +78,11 @@ public class RowShould
         Check.That(MakeSeatingPlacesWithDistance(row).Select(s => s.DistanceFromMiddleOfRow))
             .ContainsExactly(4, 3, 2, 1, 0, 1, 2, 3, 4);
 
-        var seatingPlaces = OfferSeatsNearerTheMiddleOfTheRow(row, PricingCategory.Ignore).Take(partySize);
+        var seatingPlaces= OfferSeatsNearerTheMiddleOfTheRow(row).OrderBy(s => s.DistanceFromMiddleOfRow)
+            .Select(s => s.SeatingPlace)
+            .Where(s => s.IsAvailable())
+            .Where(s => s.MatchCategory(PricingCategory.Ignore))
+            .Take(partySize);
 
         Check.That(seatingPlaces)
             .ContainsExactly(a5, a6);
@@ -96,14 +104,41 @@ public class RowShould
         return leftPart.Concat(rightPart);
     }
 
-    private IEnumerable<SeatingPlace> OfferSeatsNearerTheMiddleOfTheRow(Row row, PricingCategory pricingCategory)
+    private IEnumerable<SeatingPlaceWithDistance> OfferSeatsNearerTheMiddleOfTheRow(Row row)
     {
-        var seatingPlaces = MakeSeatingPlacesWithDistance(row);
+        return MakeSeatingPlacesWithDistance(row);
+    }
 
-        return seatingPlaces.OrderBy(s => s.DistanceFromMiddleOfRow)
-            .Select(s => s.SeatingPlace)
-            .Where(s => s.IsAvailable())
-            .Where(s => s.MatchCategory(pricingCategory));
+    [Test]
+    public void Offer_adjacent_seats_nearer_the_middle_of_the_row_when_the_middle_is_not_reserved()
+    {
+        const int partySize = 3;
+
+        var a1 = new SeatingPlace("A", 1, PricingCategory.Second, SeatingPlaceAvailability.Available);
+        var a2 = new SeatingPlace("A", 2, PricingCategory.Second, SeatingPlaceAvailability.Available);
+        var a3 = new SeatingPlace("A", 3, PricingCategory.First, SeatingPlaceAvailability.Available);
+        var a4 = new SeatingPlace("A", 4, PricingCategory.First, SeatingPlaceAvailability.Reserved);
+        var a5 = new SeatingPlace("A", 5, PricingCategory.First, SeatingPlaceAvailability.Available);
+        var a6 = new SeatingPlace("A", 6, PricingCategory.First, SeatingPlaceAvailability.Available);
+        var a7 = new SeatingPlace("A", 7, PricingCategory.First, SeatingPlaceAvailability.Available);
+        var a8 = new SeatingPlace("A", 8, PricingCategory.First, SeatingPlaceAvailability.Reserved);
+        var a9 = new SeatingPlace("A", 9, PricingCategory.Second, SeatingPlaceAvailability.Available);
+        var a10 = new SeatingPlace("A", 10, PricingCategory.Second, SeatingPlaceAvailability.Available);
+
+        var row = new Row("A", [a1, a2, a3, a4, a5, a6, a7, a8, a9, a10]);
+
+        var seatsWithDistance = OfferSeatsNearerTheMiddleOfTheRow(row);
+
+        var seatingPlaces = OfferAdjacentSeats(seatsWithDistance, partySize);
+
+        Check.That(seatingPlaces).ContainsExactly(a5, a6, a7);
+    }
+
+    // Deep Modeling: probing the code should start with a prototype.
+    private static IEnumerable<SeatingPlace> OfferAdjacentSeats(IEnumerable<SeatingPlaceWithDistance> seatsWithDistance, int partySize)
+    {
+        // Implement your prototype here
+        return new List<SeatingPlace>();
     }
 }
 
