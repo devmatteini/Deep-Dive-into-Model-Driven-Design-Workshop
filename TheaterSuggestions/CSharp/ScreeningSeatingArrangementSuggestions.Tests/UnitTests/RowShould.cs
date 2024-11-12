@@ -172,8 +172,7 @@ public class RowShould
         foreach (var seatingPlaceWithDistance in seatsWithDistance.Where(s => s.SeatingPlace.IsAvailable())
                      .OrderBy(s => s.SeatingPlace.Number))
         {
-            if (previousSeatingPlaceWithDistance.SeatingPlace.Number + 1 ==
-                seatingPlaceWithDistance.SeatingPlace.Number)
+            if (AreAdjacent(previousSeatingPlaceWithDistance, seatingPlaceWithDistance))
             {
                 if (potentiallyAdjacentSeats.Count == 0)
                 {
@@ -197,6 +196,12 @@ public class RowShould
 
         return adjacentSeats.OrderBy(a => a.SeatingPlaces.Select(s => s.DistanceFromMiddleOfRow).Min()).First()
             .SeatingPlaces.Select(s => s.SeatingPlace);
+    }
+
+    private static bool AreAdjacent(SeatingPlaceWithDistance previousSeatingPlaceWithDistance, SeatingPlaceWithDistance seatingPlaceWithDistance)
+    {
+        return previousSeatingPlaceWithDistance.SeatingPlace.Number + 1 ==
+               seatingPlaceWithDistance.SeatingPlace.Number;
     }
 }
 
